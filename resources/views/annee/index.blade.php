@@ -45,9 +45,9 @@
                             @foreach ($annees as $annee)
 
                             <tr>
-                                <th> {{ $annee->IDANNESCOLAIRE }} </th>
-                                <th>{{ $annee->ANNEESCOLAIRE }}</th>
-                                <th>{{ $annee->STATUT }}</th>
+                                <th> {{ $annee->idannescolaire }} </th>
+                                <th>{{ $annee->anneescolaire }}</th>
+                                <th>{{ $annee->statut }}</th>
                                 <th class="btn btn-primary">Modifier</th>
                                 <th class="btn btn-danger">Supprimer</th>
                             </tr>
