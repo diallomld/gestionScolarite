@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnneeScolaireController;
+use App\Http\Controllers\SemestreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,4 @@ Route::get('/login', function (){
 })->name('login');
 
 Route::resource('annee', AnneeScolaireController::class);
+Route::resource('semestre', SemestreController::class);

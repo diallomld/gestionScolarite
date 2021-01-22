@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anneescolaire;
+use App\Models\Semestre;
 use Illuminate\Http\Request;
 
-class AnneeScolaireController extends Controller
+class SemestreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class AnneeScolaireController extends Controller
      */
     public function index()
     {
-        $annees = Anneescolaire::all();
-        return view('annee.index', compact('annees'));
+        $semestres = Semestre::all();
+        return view('semestre.index', compact('semestres'));
     }
 
     /**
@@ -25,7 +26,8 @@ class AnneeScolaireController extends Controller
      */
     public function create()
     {
-        return view('annee.create');
+        $annees = Anneescolaire::all();
+        return view('semestre.create', compact('annees'));
     }
 
     /**
@@ -37,15 +39,17 @@ class AnneeScolaireController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'anneescolaire' => ['required','regex:/^[0-9]{4}(-|\/)[0-9]{4}$/'],
-            'statut' => 'required',
+            'libellesemestre' => ['required','min:3'],
+            'idanneescolaire' => ['required','exists:AnneeScolaire::class,idannescolaire'],
+            'datedebut' => ['required','date'],
+            'datefin' => ['required','date'],
         ]);
 
-        $annee = new Anneescolaire();
-        $annee->anneescolaire = $validated['anneescolaire'];
-        $annee->statut = $validated['statut'];
+        $semestre = new Semestre();
+        $semestre->anneescolaire = $validated['anneescolaire'];
+        $semestre->statut = $validated['statut'];
 
-        $annee->save();
+        $semestre->save();
 
         return redirect()->route('annee.index')->with('success',' l annee a ete créee avec succes');
     }
@@ -67,9 +71,9 @@ class AnneeScolaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anneescolaire $annee)
+    public function edit($id)
     {
-        return view('annee.edit',compact('annee'));
+        //
     }
 
     /**
@@ -79,19 +83,9 @@ class AnneeScolaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anneescolaire $annee)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'anneescolaire' => ['required','regex:/^[0-9]{4}(-|\/)[0-9]{4}$/'],
-            'statut' => 'required',
-        ]);
-
-        $annee->anneescolaire = $validated['anneescolaire'];
-        $annee->statut = $validated['statut'];
-
-        $annee->update();
-
-        return redirect()->route('annee.index')->with('success',' l annee a ete modifier avec succes');
+        //
     }
 
     /**
@@ -100,9 +94,8 @@ class AnneeScolaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anneescolaire $annee)
+    public function destroy($id)
     {
-        $annee->delete();
-        return redirect()->route('annee.index')->with('success',' l\'annee a ete supprimer avec succes');
+        //
     }
 }

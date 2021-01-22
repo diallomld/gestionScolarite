@@ -13,5 +13,16 @@ class Anneescolaire extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'idannescolaire';
+
+    protected $fillable = [
+        'anneescolaire',
+        'statut'
+    ];
+
+    public function semestres(){
+        return $this->hasMany(Semestre::class,'idannescolaire');
+    }
+
 
 }
