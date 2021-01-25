@@ -4,7 +4,7 @@
     <div class="row col-lg-12">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Liste des semestres</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Liste des Unite d'enseignement</h6>
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -23,40 +23,40 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('semestre.create') }}" class="btn btn-success">Ajouter</a>
+                    <a href="{{ route('ue.create') }}" class="btn btn-success">Ajouter</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Annee scolaire</th>
-                                <th>Libelle</th>
-                                <th>Date Debut</th>
-                                <th>Date Fin</th>
+                                <th>Filiere</th>
+                                <th>Desc Uea</th>
+                                <th>Type Uea</th>
+                                <th>Sigle Uea</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>id</th>
-                                <th>Annee scolaire</th>
-                                <th>Libelle</th>
-                                <th>Date Debut</th>
-                                <th>Date Fin</th>
+                                <th>Filiere</th>
+                                <th>Desc Uea</th>
+                                <th>Type Uea</th>
+                                <th>Sigle Uea</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($semestres as $semestre)
+                            @foreach ($ues as $ue)
 
                             <tr>
-                                <th> {{ $semestre->idsemestre }} </th>
-                                <th>{{ $semestre->annee->anneescolaire }}</th>
-                                <th>{{ $semestre->libellesemestre }}</th>
-                                <th>{{ $semestre->datedebut }}</th>
-                                <th>{{ $semestre->datefin }}</th>
-                                <th class="btn btn-primary"><a class="btn-primary" href="{{ route('semestre.edit', $semestre->idsemestre ) }}">Modifier</a></th>
+                                <th> {{ $ue->iduea }} </th>
+                                <th> {{ $ue->filiere->nomfiliere }} </th>
+                                <th>{{ $ue->descuea }}</th>
+                                <th>{{ $ue->typeue }}</th>
+                                <th>{{ $ue->sigleue }}</th>
+                                <th class="btn btn-primary"><a class="btn-primary" href="{{ route('ue.edit', $ue->iduea ) }}">Modifier</a></th>
 
-                                <form action="{{ route('semestre.destroy', $semestre->idsemestre ) }}" method="post">
+                                <form action="{{ route('ue.destroy', $ue->iduea ) }}" method="post">
                                     @method('DELETE')
                                     @csrf
                                     <th class="btn btn-danger"> <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>

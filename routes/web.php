@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\AnneeScolaireController;
+use App\Http\Controllers\DomaineController;
+use App\Http\Controllers\MentionController;
 use App\Http\Controllers\SemestreController;
+use App\Http\Controllers\SpecialiteController;
+use App\Http\Controllers\UeController;
+use App\Models\Domaine;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +30,7 @@ Route::get('/login', function (){
 
 Route::resource('annee', AnneeScolaireController::class);
 Route::resource('semestre', SemestreController::class);
+Route::resource('domaine', DomaineController::class);
+Route::resource('mention', MentionController::class);
+Route::resource('specialite', SpecialiteController::class);
+Route::resource('ue', UeController::class);

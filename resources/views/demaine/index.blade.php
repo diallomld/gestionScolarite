@@ -4,7 +4,7 @@
     <div class="row col-lg-12">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Liste des semestres</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Liste des domaines</h6>
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -23,40 +23,31 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('semestre.create') }}" class="btn btn-success">Ajouter</a>
+                    <a href="{{ route('domaine.create') }}" class="btn btn-success">Ajouter</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Annee scolaire</th>
-                                <th>Libelle</th>
-                                <th>Date Debut</th>
-                                <th>Date Fin</th>
+                                <th>Domaine</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>id</th>
-                                <th>Annee scolaire</th>
-                                <th>Libelle</th>
-                                <th>Date Debut</th>
-                                <th>Date Fin</th>
+                                <th>Domaine</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($semestres as $semestre)
+                            @foreach ($domaines as $domaine)
 
                             <tr>
-                                <th> {{ $semestre->idsemestre }} </th>
-                                <th>{{ $semestre->annee->anneescolaire }}</th>
-                                <th>{{ $semestre->libellesemestre }}</th>
-                                <th>{{ $semestre->datedebut }}</th>
-                                <th>{{ $semestre->datefin }}</th>
-                                <th class="btn btn-primary"><a class="btn-primary" href="{{ route('semestre.edit', $semestre->idsemestre ) }}">Modifier</a></th>
+                                <th> {{ $domaine->idsemestre }} </th>
+                                <th>{{ $domaine->nomdomaine }}</th>
+                                <th class="btn btn-primary"><a class="btn-primary" href="{{ route('domaine.edit', $domaine->iddomaine ) }}">Modifier</a></th>
 
-                                <form action="{{ route('semestre.destroy', $semestre->idsemestre ) }}" method="post">
+                                <form action="{{ route('domaine.destroy', $domaine->iddomaine ) }}" method="post">
                                     @method('DELETE')
                                     @csrf
                                     <th class="btn btn-danger"> <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>

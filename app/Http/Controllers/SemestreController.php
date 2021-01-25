@@ -40,18 +40,20 @@ class SemestreController extends Controller
     {
         $validated = $request->validate([
             'libellesemestre' => ['required','min:3'],
-            'idanneescolaire' => ['required','exists:AnneeScolaire::class,idannescolaire'],
+            'idanneescolaire' => ['required','exists:"App\Models\Anneescolaire",idannescolaire'],
             'datedebut' => ['required','date'],
             'datefin' => ['required','date'],
         ]);
 
         $semestre = new Semestre();
-        $semestre->anneescolaire = $validated['anneescolaire'];
-        $semestre->statut = $validated['statut'];
+        $semestre->idannescolaire = $validated['idanneescolaire'];
+        $semestre->libellesemestre = $validated['libellesemestre'];
+        $semestre->datedebut = $validated['datedebut'];
+        $semestre->datefin = $validated['datefin'];
 
         $semestre->save();
 
-        return redirect()->route('annee.index')->with('success',' l annee a ete créee avec succes');
+        return redirect()->route('semestre.index')->with('success',' le semestre a ete créee avec succes');
     }
 
     /**
@@ -71,9 +73,10 @@ class SemestreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Semestre $semestre)
     {
-        //
+        $annees = Anneescolaire::all();
+        return view('semestre.edit',compact('semestre','annees'));
     }
 
     /**
@@ -83,9 +86,23 @@ class SemestreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Semestre $semestre)
     {
-        //
+        $validated = $request->validate([
+            'libellesemestre' => ['required','min:3'],
+            'idanneescolaire' => ['required','exists:"App\Models\Anneescolaire",idannescolaire'],
+            'datedebut' => ['required','date'],
+            'datefin' => ['required','date'],
+        ]);
+
+        $semestre->idannescolaire = $validated['idanneescolaire'];
+        $semestre->libellesemestre = $validated['libellesemestre'];
+        $semestre->datedebut = $validated['datedebut'];
+        $semestre->datefin = $validated['datefin'];
+
+        $semestre->update();
+
+        return redirect()->route('semestre.index')->with('success',' le semestre a ete modifier avec succes');
     }
 
     /**
@@ -94,8 +111,9 @@ class SemestreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Semestre $semestre)
     {
-        //
+        $semestre->delete();
+        return redirect()->route('semestre.index')->with('success',' le semestre a ete supprimer avec succes');
     }
 }
