@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                   <label for="descuea">Description UE</label>
-                  <input type="text" name="descuea" class="form-control @error('descuea') is-invalid @enderror" id="descuea" placeholder="Entrer la specialite">
+                  <textarea name="descuea" class="form-control @error('descuea') is-invalid @enderror" id="descuea">Entrer la specialite</textarea>
                     @error('descuea')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror

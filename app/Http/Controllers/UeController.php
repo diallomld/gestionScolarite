@@ -52,7 +52,7 @@ class UeController extends Controller
         $ue->descuea = $validated['descuea'];
 
         $ue->save();
-        return redirect()->route('ue.index')->with('success',' la ue a ete créee avec succes');
+        return redirect()->route('ue.index')->with('success',' l\unite d\'enseignement a ete créee avec succes');
 
     }
 
@@ -75,7 +75,8 @@ class UeController extends Controller
      */
     public function edit(Ue $ue)
     {
-        //
+        $filieres = Specialite::all();
+        return view('ue.edit', compact('ue','filieres'));
     }
 
     /**
@@ -87,7 +88,20 @@ class UeController extends Controller
      */
     public function update(Request $request, Ue $ue)
     {
-        //
+        $validated = $request->validate([
+            'descuea' => ['required', 'min:3'],
+            'typeue' => ['required', 'min:3'],
+            'sigleue' => ['required', 'min:3'],
+            'filiere' => ['required','exists:"\App\Models\Specialite",idfiliere']
+        ]);
+        $ue->idfiliere = $validated['filiere'];
+        $ue->typeue = $validated['typeue'];
+        $ue->sigleue = $validated['sigleue'];
+        $ue->descuea = $validated['descuea'];
+
+        $ue->update();
+        return redirect()->route('ue.index')->with('success',' l\unite d\'enseignement a ete modifiée avec succes');
+
     }
 
     /**
@@ -98,6 +112,8 @@ class UeController extends Controller
      */
     public function destroy(Ue $ue)
     {
-        //
+        $ue->delete();
+
+        return redirect()->route('ue.index')->with('success', ' l\unite d\'enseignement a ete suprimer avec succes');
     }
 }
