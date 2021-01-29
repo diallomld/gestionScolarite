@@ -27,4 +27,8 @@ class Specialite extends Model
         return $this->belongsTo(Ue::class,'idfiliere');
     }
 
+    public function classes(){
+        return $this->hasMany(Classe::class,'idfiliere');
+    }
+
 }

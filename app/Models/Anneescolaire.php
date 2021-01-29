@@ -23,6 +23,9 @@ class Anneescolaire extends Model
     public function semestres(){
         return $this->hasMany(Semestre::class,'idannescolaire');
     }
+    public function inscriptions(){
+        return $this->hasMany(Inscription::class,'idannescolaire');
+    }
 
 
 }

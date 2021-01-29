@@ -5,27 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ue extends Model
+class Classe extends Model
 {
     use HasFactory;
-    protected $table = 'uniteenseignment';
+    protected $table = 'classe';
 
     public $timestamps = false;
 
-    protected $primaryKey = 'iduea';
+    protected $primaryKey = 'numero';
 
     protected $fillable = [
-        'descuea',
-        'typeue',
-        'sigleue',
-        'idfiliere'
+        'idfiliere',
+        'nomclasse'
     ];
 
     public function filiere(){
         return $this->belongsTo(Specialite::class,'idfiliere');
     }
-
-    public function ecs(){
-        return $this->hasMany(Ec::class,'iduea');
+    public function inscriptions(){
+        return $this->hasMany(Inscription::class,'numero');
     }
+
+
 }
