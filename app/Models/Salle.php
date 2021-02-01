@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Salle extends Model
 {
+    use HasFactory;
 
     protected $table = 'salle';
 
@@ -18,7 +19,10 @@ class Salle extends Model
     protected $fillable = [
         'idsalle',
         'nomsalle',
-        'capacite'   
+        'capacite'
     ];
-    use HasFactory;
+
+    public function cours(){
+        return $this->hasMany(Cour::class,'idcours');
+    }
 }

@@ -27,4 +27,7 @@ class Ec extends Model
     public function ue(){
         return $this->belongsTo(Ue::class,'iduea');
     }
+    public function cours(){
+        return $this->hasMany(Cour::class,'idcours');
+    }
 }

@@ -25,6 +25,9 @@ class Classe extends Model
     public function inscriptions(){
         return $this->hasMany(Inscription::class,'numero');
     }
+    public function cours(){
+        return $this->hasMany(Cour::class,'idcours');
+    }
 
 
 }

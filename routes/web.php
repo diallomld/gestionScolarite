@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnneeScolaireController;
 use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\CoursController;
 use App\Http\Controllers\DomaineController;
 use App\Http\Controllers\EcController;
 use App\Http\Controllers\EtudiantController;
@@ -42,3 +43,4 @@ Route::resource('professeur', ProfesseurController::class);
 Route::resource('ec', EcController::class);
 Route::resource('classe', ClasseController::class);
 Route::resource('inscription', InscriptionController::class);
+Route::resource('cours', CoursController::class);
