@@ -98,7 +98,7 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Modifier le cour</button>
+                <button type="submit" class="btn btn-primary">Modifier le cours</button>
             </form>
           </div>
         </div>
