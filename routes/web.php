@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnneeScolaireController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\CoursController;
@@ -44,3 +45,4 @@ Route::resource('ec', EcController::class);
 Route::resource('classe', ClasseController::class);
 Route::resource('inscription', InscriptionController::class);
 Route::resource('cours', CoursController::class);
+Route::resource('absence', AbsenceController::class);

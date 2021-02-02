@@ -34,4 +34,7 @@ class Cour extends Model
     public function salle(){
         return $this->belongsTo(Salle::class,'idsalle');
     }
+    public function absences(){
+        return $this->hasMany(Absence::class,'idcours');
+    }
 }

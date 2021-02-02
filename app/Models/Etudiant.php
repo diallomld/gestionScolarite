@@ -31,6 +31,9 @@ class Etudiant extends Model
     public function nationnalite(){
         return $this->belongsTo(Nationnalite::class, 'idnationnalite');
     }
+    public function absences(){
+        return $this->hasMany(Absence::class, 'matricule');
+    }
     public function inscription(){
         return $this->hasOne(Inscription::class, 'matricule');
     }
