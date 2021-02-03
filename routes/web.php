@@ -47,9 +47,4 @@ Route::resource('ec', EcController::class);
 Route::resource('classe', ClasseController::class);
 Route::resource('inscription', InscriptionController::class);
 Route::resource('cours', CoursController::class);
-<<<<<<< HEAD
 Route::resource('paiement', PaimentController::class);
-=======
-Route::resource('absence', AbsenceController::class);
-Route::resource('evaluation', EvaluationController::class);
->>>>>>> 95868b9857918b5490e0f4dadc8da13b5c9a6fa0
