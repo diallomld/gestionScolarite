@@ -47,4 +47,7 @@ Route::resource('ec', EcController::class);
 Route::resource('classe', ClasseController::class);
 Route::resource('inscription', InscriptionController::class);
 Route::resource('cours', CoursController::class);
+Route::resource('absence', AbsenceController::class);
+Route::resource('evaluation', EvaluationController::class);
 Route::resource('paiement', PaimentController::class);
+Route::resource('etudiant', EtudiantController::class);
