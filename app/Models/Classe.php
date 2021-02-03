@@ -28,6 +28,9 @@ class Classe extends Model
     public function cours(){
         return $this->hasMany(Cour::class,'idcours');
     }
+    public function evaluation(){
+        return $this->hasMany(Evaluation::class,'numero');
+    }
 
 
 }

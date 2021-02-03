@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnneeScolaireController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\DomaineController;
 use App\Http\Controllers\EcController;
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\MentionController;
 use App\Http\Controllers\PaimentController;
@@ -45,4 +47,9 @@ Route::resource('ec', EcController::class);
 Route::resource('classe', ClasseController::class);
 Route::resource('inscription', InscriptionController::class);
 Route::resource('cours', CoursController::class);
+<<<<<<< HEAD
 Route::resource('paiement', PaimentController::class);
+=======
+Route::resource('absence', AbsenceController::class);
+Route::resource('evaluation', EvaluationController::class);
+>>>>>>> 95868b9857918b5490e0f4dadc8da13b5c9a6fa0
