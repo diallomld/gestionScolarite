@@ -34,4 +34,7 @@ class Etudiant extends Model
     public function inscription(){
         return $this->hasOne(Inscription::class, 'matricule');
     }
+    public function paiements(){
+        return $this->hasMany(Paiement::class,'idmodepaiement');
+    }
 }
