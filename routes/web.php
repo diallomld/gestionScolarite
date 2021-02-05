@@ -32,9 +32,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', function (){
+/* Route::get('/login', function (){
     return view('layouts.login');
-})->name('login');
+})->name('login'); */
 
 Route::resource('annee', AnneeScolaireController::class);
 Route::resource('semestre', SemestreController::class);
@@ -51,3 +51,7 @@ Route::resource('absence', AbsenceController::class);
 Route::resource('evaluation', EvaluationController::class);
 Route::resource('paiement', PaimentController::class);
 Route::resource('etudiant', EtudiantController::class);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
