@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 })->name('home');
 
 /* Route::get('/login', function (){
@@ -53,5 +53,5 @@ Route::resource('paiement', PaimentController::class);
 Route::resource('etudiant', EtudiantController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('home');
 })->name('dashboard');

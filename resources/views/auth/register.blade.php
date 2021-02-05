@@ -10,6 +10,15 @@
             @csrf
 
             <div>
+                <x-jet-label for="profile" value="{{ __('Selectionner le profile') }}" />
+                <select name="profile" class="w-full mt-1 border bg-white rounded px-3 py-2 outline-none">
+                    <option class="py-1" value="1">Etudiant</option>
+                    <option class="py-1" value="2">Professeur</option>
+                    <option class="py-1" value="3">Caissier</option>
+                    <option class="py-1" value="4">Comptable</option>
+                </select>
+            </div>
+            <div class="mt-3">
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
