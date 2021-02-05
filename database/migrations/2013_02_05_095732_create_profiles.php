@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSemestresTable extends Migration
+class CreateProfiles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class CreateSemestresTable extends Migration
      */
     public function up()
     {
-        Schema::create('semestre', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->id();
+            $table->string('nom',100)->unique();
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ class CreateSemestresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semestre');
+        Schema::dropIfExists('profiles');
     }
 }
