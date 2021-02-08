@@ -15,6 +15,7 @@ use App\Http\Controllers\NationnaliteController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\RecuController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\SpecialiteController;
@@ -71,3 +72,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $profs = Professeur::all()->count();
     return view('home', compact('paiements','etudiants','profs'));
 })->name('dashboard');
+
+
+
+
+
+// Pour les bulletins et factures
+
+Route::get('pdf', [RecuController::class,'createPDF'])->name('recu');

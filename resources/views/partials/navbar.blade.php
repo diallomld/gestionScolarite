@@ -42,7 +42,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"></h6>
-                <a class="collapse-item" href="">Gestion des Nationnalités</a>
+                <a class="collapse-item" href="{{ route('nationnalite.index') }}">Gestion des Nationnalités</a>
                 <a class="collapse-item" href="{{ route('etudiant.index') }}">Gestion des Etudiants</a>
                 <a class="collapse-item" href="{{ route('annee.index') }}">Gestion des Annee Scolaire</a>
                 <a class="collapse-item" href="{{ route('semestre.index') }}">Gestion des Semestre</a>
