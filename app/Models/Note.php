@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Note extends Model
 {
     use HasFactory;
-
-    protected $table = 'profiles';
+    protected $table = 'note';
 
     public $timestamps = false;
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idnote';
 
     protected $fillable = [
-        'nomprofile',
+        'idec',
+        'note',
     ];
-
-    public function users(){
-        return $this->hasMany(User::class);
+    public function ec(){
+        return $this->belongsTo(Ec::class, 'idec');
     }
 }

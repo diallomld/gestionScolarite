@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Profil extends Model
 {
     use HasFactory;
-
-    protected $table = 'profiles';
+    protected $table = 'profil';
 
     public $timestamps = false;
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idprofil';
 
     protected $fillable = [
-        'nomprofile',
+        'nomprofil',
     ];
-
-    public function users(){
-        return $this->hasMany(User::class);
-    }
 }

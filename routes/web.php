@@ -10,11 +10,17 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\MentionController;
+use App\Http\Controllers\ModePaiementController;
+use App\Http\Controllers\NationnaliteController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\SpecialiteController;
 use App\Http\Controllers\UeController;
+use App\Models\ModePaiement;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +56,11 @@ Route::resource('cours', CoursController::class);
 Route::resource('absence', AbsenceController::class);
 Route::resource('evaluation', EvaluationController::class);
 Route::resource('paiement', PaimentController::class);
+Route::resource('modepaiement', ModePaiementController::class);
 Route::resource('etudiant', EtudiantController::class);
+Route::resource('nationnalite', NationnaliteController::class);
+Route::resource('profile', ProfileController::class);
+Route::resource('note', NoteController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('home');
