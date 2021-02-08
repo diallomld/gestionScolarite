@@ -11,7 +11,7 @@ class Domaine extends Model
 
     protected $table = 'domaine';
 
-    public $timestamps = false;
+    //public $timestamps = false;
 
     protected $primaryKey = 'iddomaine';
 

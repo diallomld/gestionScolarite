@@ -12,9 +12,13 @@ use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\MentionController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\SpecialiteController;
 use App\Http\Controllers\UeController;
+use App\Models\Etudiant;
+use App\Models\Paiement;
+use App\Models\Professeur;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,23 +39,29 @@ Route::get('/', function () {
 /* Route::get('/login', function (){
     return view('layouts.login');
 })->name('login'); */
+Route::middleware('auth')->group(function(){
+    Route::resource('annee', AnneeScolaireController::class);
+    Route::resource('semestre', SemestreController::class);
+    Route::resource('domaine', DomaineController::class);
+    Route::resource('mention', MentionController::class);
+    Route::resource('specialite', SpecialiteController::class);
+    Route::resource('ue', UeController::class);
+    Route::resource('professeur', ProfesseurController::class);
+    Route::resource('ec', EcController::class);
+    Route::resource('classe', ClasseController::class);
+    Route::resource('inscription', InscriptionController::class);
+    Route::resource('cours', CoursController::class);
+    Route::resource('absence', AbsenceController::class);
+    Route::resource('evaluation', EvaluationController::class);
+    Route::resource('paiement', PaimentController::class);
+    Route::resource('etudiant', EtudiantController::class);
+    Route::resource('salle', SalleController::class);
+});
 
-Route::resource('annee', AnneeScolaireController::class);
-Route::resource('semestre', SemestreController::class);
-Route::resource('domaine', DomaineController::class);
-Route::resource('mention', MentionController::class);
-Route::resource('specialite', SpecialiteController::class);
-Route::resource('ue', UeController::class);
-Route::resource('professeur', ProfesseurController::class);
-Route::resource('ec', EcController::class);
-Route::resource('classe', ClasseController::class);
-Route::resource('inscription', InscriptionController::class);
-Route::resource('cours', CoursController::class);
-Route::resource('absence', AbsenceController::class);
-Route::resource('evaluation', EvaluationController::class);
-Route::resource('paiement', PaimentController::class);
-Route::resource('etudiant', EtudiantController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('home');
+    $paiements = Paiement::all()->sum('montant');
+    $etudiants = Etudiant::all()->count();
+    $profs = Professeur::all()->count();
+    return view('home', compact('paiements','etudiants','profs'));
 })->name('dashboard');

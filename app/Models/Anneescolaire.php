@@ -11,7 +11,7 @@ class Anneescolaire extends Model
 
     protected $table = 'anneescolaire';
 
-    public $timestamps = false;
+    //public $timestamps = false;
 
     protected $primaryKey = 'idannescolaire';
 
