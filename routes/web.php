@@ -59,6 +59,9 @@ Route::middleware('auth')->group(function(){
     Route::resource('paiement', PaimentController::class);
     Route::resource('etudiant', EtudiantController::class);
     Route::resource('salle', SalleController::class);
+    Route::resource('note', NoteController::class);
+    Route::resource('nationnalite', NationnaliteController::class);
+    Route::resource('modepaiement', ModePaiementController::class);
 });
 
 
