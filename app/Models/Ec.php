@@ -33,4 +33,7 @@ class Ec extends Model
     public function evaluation(){
         return $this->hasMany(Evaluation::class,'idec');
     }
+    public function notes(){
+        return $this->hasMany(Note::class,'idnote');
+    }
 }

@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Ec;
+use App\Models\Note;
+use Illuminate\Http\Request;
+
+class NoteController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $notes = Note::all();
+        return view("note.index",compact("notes"));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $ecs = Ec::all();
+        return view("note.create",compact("ecs"));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'note' => ['required'],
+            'idec' => ['required','exists:"\App\Models\Ec","idec'],
+        ]);
+
+        $note = new Note();
+
+        $note->note = $validated['note'];
+        $note->idec = $validated['idec'];
+
+        $note->save();
+        return redirect()->route('note.index')->with('success',' la note a ete créee avec succes');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Note $note)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Note $note)
+    {
+        $ecs = Ec::all();
+        return view('note.edit',compact('note','ecs'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Note $note)
+    {
+        $validated = $request->validate([
+            'note' => ['required'],
+            'idec' => ['required','exists:"\App\Models\ec","idec'],
+        ]);
+
+        //dd($request->all());
+        $note->note = $validated['note'];
+        $note->idec = $validated['idec'];
+
+        $note->update();
+        return redirect()->route('note.index')->with('success',' la note a ete modifier avec succes');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Note $note)
+    {
+        $note->delete();
+        return redirect()->route('note.index')->with('success',' la note a ete supprimer avec succes');
+    }
+}
