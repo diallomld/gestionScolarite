@@ -60,9 +60,9 @@
                 <h6 class="collapse-header"></h6>
                 <a class="collapse-item" href="{{ route('inscription.index') }}">Gestion des Inscriptions</a>
                 @auth
-                    @if (Auth::user()->profile->nom =="Comptable")
+                    @if (Auth::user())
                     <a class="collapse-item" href="{{ route('paiement.index') }}">Gestion des Paiements</a>
-                    <a class="collapse-item" href="">Gestion des Mode de Paiements</a>
+                    <a class="collapse-item" href="{{ route('modepaiement.index') }}">Gestion des Mode de Paiements</a>
                     @endif
                 @endauth
             </div>
@@ -77,8 +77,8 @@
         <div id="collapseFoor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"></h6>
-                <a class="collapse-item" href="{{ route('inscription.index') }}">Gestion des Evaluations</a>
-                <a class="collapse-item" href="">Gestion des Notes</a>
+                <a class="collapse-item" href="{{ route('evaluation.index') }}">Gestion des Evaluations</a>
+                <a class="collapse-item" href="{{ route('note.index')}}">Gestion des Notes</a>
             </div>
         </div>
     </li>
