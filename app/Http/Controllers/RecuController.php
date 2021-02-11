@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paiement;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use PDF;
 
 class RecuController extends Controller
 {
@@ -22,5 +25,16 @@ class RecuController extends Controller
 
         $this->fpdf->Output();
         exit;
+    }
+
+    public function recu(int $id){
+
+        $paiement = Paiement::findOrFail($id);
+
+        new ModelNotFoundException('Erreur');
+        //dd($paiement);
+        $pdf = PDF::loadView('recu.recu', compact('paiement'));
+
+        return $pdf->stream();
     }
 }

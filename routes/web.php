@@ -82,4 +82,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 // Pour les bulletins et factures
 
-Route::get('pdf', [RecuController::class,'createPDF'])->name('recu');
+//Route::get('pdf', [RecuController::class,'createPDF'])->name('recu');
+Route::get('recu/{id}', [RecuController::class,'recu'])->name('recu');
