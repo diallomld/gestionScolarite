@@ -34,7 +34,7 @@
                                 <th>Date Paiement</th>
                                 <th>Mois</th>
                                 <th>Observation</th>
-                                <th>Action</th>
+                                <th style="width: 200px;">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -46,7 +46,7 @@
                                 <th>Date Paiement</th>
                                 <th>Mois</th>
                                 <th>Observation</th>
-                                <th>Action</th>
+                                <th style="width: fit-content;">Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -60,14 +60,16 @@
                                 <td> {{ $paiement->datepaiement }} </td>
                                 <td>{{ $paiement->mois }}</td>
                                 <td>{{ $paiement->observation }}</td>
-                                <td class="btn btn-primary"><a class="btn-primary" href="{{ route('paiement.edit', $paiement->idpaiement ) }}">Modifier</a></td>
+                                <td >
+                                    <a class="btn-primary" href="{{ route('paiement.edit', $paiement->idpaiement ) }}">Modifier</a>
+                                    <a class="btn-success" href="{{ route('recu', $paiement->idpaiement)}}"> <i class="fas fa-print"></i> Imprimer</a> <br>
+                                    <form action="{{ route('paiement.destroy', $paiement->idpaiement ) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button>
 
-                                <form action="{{ route('paiement.destroy', $paiement->idpaiement ) }}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <th class="btn btn-danger"> <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>
+                                    </form>
+                                </td>
 
-                                </form>
                             </tr>
 
                             @endforeach
