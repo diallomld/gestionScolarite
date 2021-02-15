@@ -1,24 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Recu</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
-        .section{
-            align-content: space-between;
-            color: blue;
-            display: inline-flex;
-            flex: 30%;
-        }
-        .end{
-            color: rgb(66, 39, 223)
-
-            justify-content: end;
-        }
-        .start{
-            justify-content: start;
-        }
         li{
             list-style: none;
         }
@@ -28,16 +15,16 @@
     <table>
         <tr>
             <td>
-                <img src="http://placehold.it/100x100" alt="">
+                <img src="http://placehold.it/150x150" alt="logo"/>
             </td>
-            <td style="margin: 20%;">
+            <td style="padding-left: 200px; float: right; text-align: center">
                 <p><b>Univers professionnel</b></p>
-                <p>Faites vos etudes en entreprise</p>
-                <p>Aut n^ 232 MESR/DEGES/DESP</p>
+                <p class="">Faites vos etudes en entreprise</p>
+                <p class="">Aut n^ 232 MESR/DEGES/DESP</p>
             </td>
         </tr>
     </table>
-    <table class="">
+    <table class="" style="margin-top: 2px;">
         <td>
             411-21-4544/Unipro
         </td>
@@ -61,8 +48,8 @@
                     <p>Banque chéque:</p>
                 </fieldset>
             </td>
-            <td style="width:300px;">
-                <fieldset>
+            <td style="width:300px; height: 500px; text-align: center;">
+                <fieldset >
                     <legend>{{ $paiement->etudiant->matricule}}</legend>
                     <p>{{ $paiement->etudiant->nom}} {{ $paiement->etudiant->prenom}} </p>
                 </fieldset>
@@ -77,7 +64,7 @@
                 <li>nature: {{ $paiement->observation}}</li>
                 <li>a titre de: ouverture</li>
                 <li>Annee: {{ $paiement->etudiant->inscription->annee->anneescolaire}}</li>
-                <li>Total recu: {{ $paiement->montantpaiement}}</li>
+                <li>Total recu: {{ $paiement->montant}}</li>
                 <li>
                     <p>Cantine: 0, Transport:0, Scolarite: 1000</p>
                 <li>
@@ -134,9 +121,10 @@
     </table>
     <table>
         <tr>
-            <td> 03/12/2020 à 09:55:51</td>
+            <td>{{ Carbon\Carbon::now()->toDateTimeString() }}</td>
             <td>caché</td>
         </tr>
     </table>
+
 </body>
 </html>
