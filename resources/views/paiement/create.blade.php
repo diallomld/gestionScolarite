@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label for="mois">Select. Le mois</label>
-                    <select name="mois" class="form-control @error('mois') is-invalid @enderror" id="mois">
+                    <select id="select2" multiple name="mois[]" class="form-control @error('mois') is-invalid @enderror" id="mois">
                       @foreach ($mois as $moi)
                           <option value="{{ $moi }}">{{ $moi }}</option>
                       @endforeach
@@ -78,3 +78,7 @@
 
     <div>
 @endsection
+
+<script type="text/javascript">
+
+</script>

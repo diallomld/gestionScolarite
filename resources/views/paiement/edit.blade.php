@@ -52,15 +52,16 @@
                 </div>
                 <div class="form-group">
                     <label for="mois">Select. Le mois</label>
-                    <select name="mois" class="form-control @error('mois') is-invalid @enderror" id="mois">
-                      <option value="{{ $paiement->mois }}">{{ $paiement->mois }}<option>
+                    <select multiple name="mois[]" class="form-control @error('mois') is-invalid @enderror" id="mois">
+
                       @foreach ($mois as $moi)
 
-                        @if ($paiement->mois != $moi)
+                        <option value="{{ $moi }}" @foreach (json_decode($paiement->mois) as $m)
+                            @if ($moi == $m)
+                                selected
+                            @endif
+                        @endforeach>{{ $moi }}</option>
 
-                            <option value="{{ $moi }}">{{ $moi }}</option>
-
-                        @endif
                       @endforeach
                     </select>
                     @error('mois')

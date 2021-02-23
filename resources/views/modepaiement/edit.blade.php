@@ -4,7 +4,7 @@
     <div class="align-content-md-center">
 
         <div class="card text-left">
-            <div class="card-header">Formulaire de modification d'un modepaiemen</div>
+            <div class="card-header">Formulaire de modification d'un mode de paiement</div>
           <div class="card-body">
             <form method="POST" action="{{ route('modepaiement.update',$modepaiement->idmodepaiement)}}">
                 {{-- @if ($errors->any())

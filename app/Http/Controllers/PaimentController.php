@@ -6,6 +6,7 @@ use App\Models\Etudiant;
 use App\Models\ModePaiement;
 use App\Models\Paiement;
 use Illuminate\Http\Request;
+use PHPUnit\Util\Json;
 
 class PaimentController extends Controller
 {
@@ -17,6 +18,7 @@ class PaimentController extends Controller
     public function index()
     {
         $paiements = Paiement::all();
+        //dd(json_decode($paiements[0]->mois));
         return view('paiement.index', compact('paiements'));
     }
 
@@ -53,12 +55,14 @@ class PaimentController extends Controller
             'observation' => ['required','min:3'],
         ]);
 
+        //dd($request->mois);
+        //dd(json_encode($request->mois));
         $paiement = new Paiement();
         $paiement->matricule = $request->matricule;
         $paiement->idmodepaiement = $request->modepaiement;
         $paiement->datepaiement = $request->datepaiement;
         $paiement->observation = $request->observation;
-        $paiement->mois = $request->mois;
+        $paiement->mois = json_encode($request->mois);
 
         $paiement->montant = $request->montant;
 
@@ -116,7 +120,7 @@ class PaimentController extends Controller
         $paiement->idmodepaiement = $request->modepaiement;
         $paiement->datepaiement = $request->datepaiement;
         $paiement->observation = $request->observation;
-        $paiement->mois = $request->mois;
+        $paiement->mois = json_encode($request->mois);
         $paiement->montant = $request->montant;
 
         $paiement->save();
