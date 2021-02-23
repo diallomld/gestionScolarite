@@ -9,6 +9,9 @@
         li{
             list-style: none;
         }
+        legend {
+            font-style: italic
+        }
     </style>
 </head>
 <body>
@@ -24,20 +27,20 @@
             </td>
         </tr>
     </table>
-    <table class="" style="margin-top: 2px;">
+    <table style="margin-top: 2px;">
         <td>
             411-21-4544/Unipro
         </td>
-        <td class="content-end" style="float: right">
+        <td style="float: right">
             <b>Sevice Facturation Unipro</b>
         </td>
     </table>
 
     <table>
         <tr>
-            <td style="width: 300px;">
-                <fieldset>
-                    <legend>info reçu</legend>
+            <td style="width: 338px; height: 300px;">
+                <fieldset style="border-radius: 10px;">
+                    <legend><b>Info reçu</b></legend>
                     <p>n reçu: 21 061</p>
                     <p>Date: {{ $paiement->datepaiement}}</p>
                     <p>Encaissé par: unipro-kn</p>
@@ -48,20 +51,20 @@
                     <p>Banque chéque:</p>
                 </fieldset>
             </td>
-            <td style="width:300px; height: 500px; text-align: center;">
-                <fieldset >
-                    <legend>{{ $paiement->etudiant->matricule}}</legend>
-                    <p>{{ $paiement->etudiant->nom}} {{ $paiement->etudiant->prenom}} </p>
+            <td style="text-align: center;">
+                <fieldset style="height: 300px; width: 328px; border-radius: 15px;">
+                    <legend style="margin-left: 140px;"><b>{{ $paiement->etudiant->matricule}}</b></legend>
+                    <p style="margin-top: 100px;">{{ $paiement->etudiant->nom}} {{ $paiement->etudiant->prenom}} </p>
                 </fieldset>
             </td>
         </tr>
     </table>
 
     <div>
-        <fieldset>
+        <fieldset style="border-radius: 10px; border: gray">
 
-            <ul>
-                <li>nature: {{ $paiement->observation}}</li>
+            <ul style="margin-left: 0px;">
+                <li style="margin-left: 0px;">nature: {{ $paiement->observation}}</li>
                 <li>a titre de: ouverture</li>
                 <li>Annee: {{ $paiement->etudiant->inscription->annee->anneescolaire}}</li>
                 <li>Total recu: {{ $paiement->montant}}</li>
@@ -74,7 +77,7 @@
     <div>
         <p>Nb: Paiement le 5 de chaque mois au plus tard</p>
 
-        <fieldset> <legend><b>Rappel  des factures restantes</b></legend>
+        <fieldset style="border-radius: 10px;"> <legend><b>Rappel  des factures restantes</b></legend>
             <table>
                 <tr>
                     <td>

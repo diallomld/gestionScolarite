@@ -58,7 +58,14 @@
                                 <td> {{ $paiement->etudiant->matricule }} </td>
                                 <td> {{ $paiement->montant }} </td>
                                 <td> {{ $paiement->datepaiement }} </td>
-                                <td>{{ $paiement->mois }}</td>
+                                <td>
+                                @foreach (json_decode($paiement->mois) as $moi)
+                                    {{ $moi }}
+                                    @if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                                </td>
                                 <td>{{ $paiement->observation }}</td>
                                 <td >
                                     <a class="btn-primary" href="{{ route('paiement.edit', $paiement->idpaiement ) }}">Modifier</a>
