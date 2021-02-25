@@ -27,4 +27,8 @@ class Evaluation extends Model
     public function classe(){
         return $this->belongsTo(Classe::class, 'numero');
     }
+    public function semestre(){
+        return $this->belongsTo(Semestre::class, 'idsemestre');
+    }
+    
 }

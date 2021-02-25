@@ -24,9 +24,19 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label for="typeevaluation">Type Evaluation</label>
                   <input type="text" name="typeevaluation" class="form-control @error('typeevaluation') is-invalid @enderror" id="typeevaluation" placeholder="Entrer votre prenom">
+                    @error('typeevaluation')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div> --}}
+                <div class="form-group">
+                    <label for="typeevaluation">Type Evaluation</label>
+                    <select name="typeevaluation" class="form-control @error('typeevaluation') is-invalid @enderror" id="typeevaluation">
+                          <option value="examen">Examen</option>
+                          <option value="devoir">Devoir</option>
+                    </select>
                     @error('typeevaluation')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror

@@ -25,4 +25,7 @@ class Semestre extends Model
     public function annee(){
         return $this->belongsTo(Anneescolaire::class, 'idannescolaire');
     }
+    public function evaluations(){
+        return $this->hasMany(Evaluation::class,'idsemestre');
+    }
 }
