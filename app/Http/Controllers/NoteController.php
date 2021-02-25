@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ec;
+use App\Models\Etudiant;
+use App\Models\Evaluation;
 use App\Models\Note;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,9 @@ class NoteController extends Controller
     public function create()
     {
         $ecs = Ec::all();
-        return view("note.create",compact("ecs"));
+        $evaluations = Evaluation::all();
+        $etudiants = Etudiant::all();
+        return view("note.create",compact("ecs","evaluations","etudiants"));
     }
 
     /**
@@ -41,12 +45,16 @@ class NoteController extends Controller
         $validated = $request->validate([
             'note' => ['required'],
             'idec' => ['required','exists:"\App\Models\Ec","idec'],
+            'matricule' => ['required','exists:"\App\Models\Etudiant","matricule'],
+            'idevaluation' => ['required','exists:"\App\Models\Evaluation","idevaluation'],
         ]);
 
         $note = new Note();
 
         $note->note = $validated['note'];
         $note->idec = $validated['idec'];
+        $note->idevaluation = $validated['idevaluation'];
+        $note->matricule = $validated['matricule'];
 
         $note->save();
         return redirect()->route('note.index')->with('success',' la note a ete créee avec succes');

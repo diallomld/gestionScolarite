@@ -31,4 +31,7 @@ class Evaluation extends Model
         return $this->belongsTo(Semestre::class, 'idsemestre');
     }
     
+    public function notes(){
+        return $this->hasMany(Note::class, 'idevaluation');
+    }
 }

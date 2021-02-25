@@ -30,6 +30,8 @@
                                 <th>id</th>
                                 <th>Ec</th>
                                 <th>Note</th>
+                                <th>Evaluation</th>
+                                <th>Etudiant</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,6 +40,8 @@
                                 <th>id</th>
                                 <th>Ec</th>
                                 <th>Note</th>
+                                <th>Evaluation</th>
+                                <th>Etudiant</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -48,6 +52,8 @@
                                 <th> {{ $note->idnote }} </th>
                                 <th>{{ $note->ec->nomec}}</th>
                                 <th>{{ $note->note }}</th>
+                                <th>{{ $note->evaluation->typeevaluation }}</th>
+                                <th>{{ $note->etudiant->nom }}</th>
                                 <th class="btn btn-primary"><a class="btn-primary" href="{{ route('note.edit', $note->idnote ) }}">Modifier</a></th>
 
                                 <form action="{{ route('note.destroy', $note->idnote ) }}" method="post">

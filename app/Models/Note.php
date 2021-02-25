@@ -21,4 +21,11 @@ class Note extends Model
     public function ec(){
         return $this->belongsTo(Ec::class, 'idec');
     }
+
+    public function evaluation(){
+        return $this->belongsTo(Evaluation::class, 'idevaluation');
+    }
+    public function etudiant(){
+        return $this->belongsTo(Etudiant::class, 'matricule');
+    }
 }

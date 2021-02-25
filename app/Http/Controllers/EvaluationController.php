@@ -41,12 +41,12 @@ class EvaluationController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            
+
             'idec' => ['required','exists:"App\Models\Ec",idec'],
             'numero' => ['required','exists:"App\Models\Classe",numero'],
             'dateevaluation' => ['required'],
             'typeevaluation' => ['required'],
-            
+
         ]);
 
         $evaluation = new Evaluation();
@@ -94,12 +94,12 @@ class EvaluationController extends Controller
     public function update(Request $request, Evaluation $evaluation)
     {
         $validated = $request->validate([
-            
+
             'idec' => ['required','exists:"App\Models\Ec",idec'],
             'numero' => ['required','exists:"App\Models\Classe",numero'],
             'dateevaluation' => ['required'],
             'typeevaluation' => ['required'],
-            
+
         ]);
 
         $evaluation->idec = $validated['idec'];

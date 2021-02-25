@@ -12,10 +12,15 @@
             <div>
                 <x-jet-label for="profile" value="{{ __('Selectionner le profile') }}" />
                 <select name="profile" class="w-full mt-1 border bg-white rounded px-3 py-2 outline-none">
-                    <option class="py-1" value="2">Etudiant</option>
-                    <option class="py-1" value="1">Professeur</option>
+
+                    @foreach ($profiles as $profile)
+
+                        <option class="py-1" value="{{ $profile->id }}">{{ $profile->nom}}</option>
+
+                    @endforeach
+                    <!--<option class="py-1" value="1">Etudiant</option>
                     <option class="py-1" value="3">Caissier</option>
-                    <option class="py-1" value="4">Comptable</option>
+                    <option class="py-1" value="4">Comptable</option> -->
                 </select>
             </div>
             <div class="mt-3">
