@@ -15,7 +15,7 @@ use App\Http\Controllers\NationnaliteController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\ProfesseurController;
-use App\Http\Controllers\RecuController;
+use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\SpecialiteController;
@@ -80,4 +80,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 // Pour les bulletins et factures
 
 //Route::get('pdf', [RecuController::class,'createPDF'])->name('recu');
-Route::get('recu/{id}', [RecuController::class,'recu'])->name('recu');
+Route::get('recu/{id}', [RapportController::class,'recu'])->name('recu');
+Route::get('bulletin/{id}', [RapportController::class,'bulletin'])->name('bulletin');
