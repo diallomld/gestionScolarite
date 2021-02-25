@@ -27,4 +27,7 @@ class Evaluation extends Model
     public function classe(){
         return $this->belongsTo(Classe::class, 'numero');
     }
+    public function notes(){
+        return $this->hasMany(Note::class, 'idevaluation');
+    }
 }

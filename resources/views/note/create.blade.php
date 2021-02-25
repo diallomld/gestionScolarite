@@ -35,6 +35,28 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="idevaluation">Selectionner le type d'evaluation</label>
+                    <select name="idevaluation" class="form-control @error('idevaluation') is-invalid @enderror" id="idevaluation">
+                      @foreach ($evaluations as $eva)
+                          <option value="{{ $eva->idevaluation }}">{{ $eva->typeevaluation }}</option>
+                      @endforeach
+                    </select>
+                    @error('idevaluation')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="matricule">Selectionner l'etudiant</label>
+                    <select name="matricule" class="form-control @error('matricule') is-invalid @enderror" id="matricule">
+                      @foreach ($etudiants as $et)
+                          <option value="{{ $et->matricule }}">{{ $et->nom }}</option>
+                      @endforeach
+                    </select>
+                    @error('matricule')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
                 <button type="submit" class="btn btn-primary">Ajouter la note</button>
             </form>
           </div>
