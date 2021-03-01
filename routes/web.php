@@ -16,6 +16,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\SpecialiteController;
