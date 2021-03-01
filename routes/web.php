@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('nationnalite', NationnaliteController::class);
     Route::resource('modepaiement', ModePaiementController::class);
 });
-Route::resource('profile', ProfilController::class);
+Route::resource('profile', ProfilController::class)->except('show');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
