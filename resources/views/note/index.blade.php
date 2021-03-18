@@ -1,6 +1,10 @@
 @extends('master')
 
 @section('content')
+    @php
+        $test = "alert";
+    @endphp
+    {{ dump($test) }}
     <div class="row col-lg-12">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
@@ -50,7 +54,7 @@
 
                             <tr>
                                 <th> {{ $note->idnote }} </th>
-                                <th>{{ $note->ec->nomec}}</th>
+                                <th>{{ $note->evaluation->ec->nomec}}</th>
                                 <th>{{ $note->note }}</th>
                                 <th>{{ $note->evaluation->typeevaluation }}</th>
                                 <th>{{ $note->etudiant->nom }}</th>

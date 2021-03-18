@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bulletins de note</title>
     <style>
+        .validate{
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
         li{
             list-style: none;
         }
@@ -51,23 +56,23 @@
                     </tr>
                     <tr>
                         <td>Annee accademique</td>
-                        <td>2019-2020</td>
+                        <td>{{ $etudiant->inscription->annee->anneescolaire}}</td>
                     </tr>
                     <tr>
                         <td>Matricule</td>
-                        <td>411-20-3625/unipro</td>
+                        <td>{{ $etudiant->matricule }}/unipro</td>
                     </tr>
                     <tr>
                         <td>Nom et prenom</td>
-                        <td>Lamine Diallo</td>
+                        <td>{{ $etudiant->prenom}} {{ $etudiant->nom}}</td>
                     </tr>
                     <tr>
                         <td>Sexe</td>
-                        <td>Masculin</td>
+                        <td>{{ $etudiant->genre}}</td>
                     </tr>
                     <tr>
                         <td>Lieu & Date naissance</td>
-                        <td>01.01.2020 Thies</td>
+                        <td>{{ $etudiant->datenaissance}} {{ $etudiant->lieu}}</td>
                     </tr>
                 </table>
             </td>
@@ -76,10 +81,10 @@
     </table>
     <table border="1px" style="width: 100%; text-align: center">
         <tr>
-            <td> <b> <u> Domaine </u></b> <br> science et technolgie</td>
-            <td> <b><u>Filiere</u></b> <br>Informatique</td>
+            <td> <b> <u> Domaine </u></b> <br> {{ $etudiant->inscription->classe->filiere->mention->domaine->nomdomaine}}</td>
+            <td> <b><u>Mention</u></b> <br>{{ $etudiant->inscription->classe->filiere->mention->nommention}}</td>
             <td> <b><u>Specialite</u></b> <br> genie informatique</td>
-            <td> <b><u>Specialite</u></b> <br> genie informatique</td>
+            <td> <b><u>Grade</u></b> <br> {{ $etudiant->inscription->classe->nomclasse}}</td>
         </tr>
     </table>
     <table border="1px" style="width: 100%; text-align: center">
@@ -96,54 +101,188 @@
             <td>Appreciation </td>
 
         </tr>
+        <?php
+            $totalCredit = 0;
+            $moySemestre = 0;
+            $tabRecap = [];
+            $tabCredit = [];
+            ?>
+        @foreach ($etudiant->inscription->classe->filiere->uniteEnseignements as $ues)
+
         <tr style="text-align: start">
-            <td colspan="10"><b>UE 411 PRORAMMATION</b></td>
+            <td colspan="10"><b>{{ $ues->descuea }}</b></td>
         </tr>
-        <tr>
-            <td style="150px"> <b>Java</b></td>
-            <td> 16.50 </td>
-            <td> 16.50 </td>
-            <td></td>
-            <td> 16.50 </td>
-            <td> 5.0 </td>
-            <td>82.0</td>
-            <td></td>
-            <td></td>
-            <td>Tres bien </td>
-        </tr>
-        <tr>
-            <td style="150px"> <b>Rappel POO</b></td>
-            <td> 18.50 </td>
-            <td> 17.50 </td>
-            <td></td>
-            <td> 17.50 </td>
-            <td> 5.0 </td>
-            <td>82.0</td>
-            <td></td>
-            <td></td>
-            <td>Excelent</td>
-        </tr>
-        <tr style="background: gray">
-            <td colspan="5"></td>
-            <td>10.00 </td>
-            <td>162.00</td>
-            <td>10</td>
-            <td>16.02</td>
-            <td>Validé</td>
-        </tr>
+        <?php
+                $somme = 0;
+                $sommeCoef = 0;
+                $sommeMoyUe = 0;
+                $totalCredit = 0;
+                $totalUe = 0;
+             ?>
+            @foreach ($ues->ecs as $ec)
+                <tr>
+                    <td style="150px"> <b>{{ $ec->nomec}}</b></td>
+                   @foreach ($ec->evaluations as $eva)
+
+                   <td> <?php if (isset($eva->note->note)) {
+                       echo $eva->note->note;
+                   } else {
+                       echo '0';
+                   }
+                    ?> </td>
+
+                    @if ($eva->typeevaluation=="devoir")
+                        <?php
+                            $devoir=$eva->note->note;
+                        ?>
+                    @elseif ($eva->typeevaluation=="examen")
+                        @php
+                            $examen = $eva->note->note;
+                        @endphp
+                    @else
+                        @php
+                            $rattrap = $eva->note->note;
+                        @endphp
+                    @endif
+                   @endforeach
+                    <td></td>
+                    <td>
+                        <?php
+                            if (!isset($devoir) || !isset($examen)) {
+
+                            } else {
+                                $moy = $devoir*0.4 + $examen*0.6;
+                                $sommeMoyUe+=$moy;
+                                echo $moy;
+                            }
+
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $credit = ($ec->cm + $ec->td + $ec->tpe)/20;
+                        $round = round($credit,0,PHP_ROUND_HALF_UP);
+                        $somme+= $round;
+                        echo number_format($round,2,'.',' ');
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                            $moyCoef = $moy*$credit;
+                            $sommeCoef+=$moyCoef;
+                            echo number_format($moyCoef,2,'.',' ');
+                        ?>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <?php
+                            if ($moy>=10 and $moy<12) {
+                                echo 'Passable';
+                            }elseif ($moy>=12 and $moy<14) {
+                                echo 'Assez-bien';
+                            }elseif ($moy>=14 and $moy<16) {
+                                echo 'Bien';
+                            }elseif ($moy>=16 and $moy<18) {
+                                echo "Tres bien";
+                            }elseif ($moy>=18 and $moy<=20) {
+                                echo "Excelent";
+                            }else {
+                                echo 'ko';
+                            }
+                        ?>
+                    </td>
+                </tr>
+            @endforeach
+            <tr style="background: gray">
+                <td colspan="5"></td>
+                <td><?php echo number_format($somme,2,'.',' '); ?></td>
+                <td><?php echo number_format($sommeCoef,2,'.',' '); ?></td>
+                <td><?php echo number_format($somme,2,'.',' '); ?></td>
+                <td>
+                    <?php
+                        $totalCredit+=$somme;
+                        $divider = $sommeMoyUe/count($ues->ecs);
+                        $moySemestre+= $divider;
+                        $tabRecap[] = number_format($divider,2,'.',' ');
+                        $tabCredit[] = $somme;
+                        $totalUe+=1;
+                        echo number_format($divider,3,'.',' ');
+                    ?>
+                </td>
+                <td>Validé</td>
+            </tr>
+        @endforeach
     </table>
 
     <table border="1">
         <tr>
             <td style="width: 580px;"><b>Total credit obtenus:</b></td>
-            <td style="color: #441adb; font-weight: bold; font-size: 30px">30.00/30</td>
+            <td style="color: #441adb; font-weight: bold; font-size: 30px"><?php echo number_format($totalCredit,2,'.',' ');?>/30</td>
         </tr>
         <tr>
             <td><b>Moyenne du Semestre</b></td>
-            <td style="color: #441adb; font-weight: bold; font-size: 30px">17.73/20</td>
+            <td style="color: #441adb; font-weight: bold; font-size: 30px">
+                @php
+                    $moySem = $moySemestre/$totalUe;
+                    echo number_format($moySem,2,'.',' ');
+                @endphp/20
+            </td>
         </tr>
         <tr>
-            <td colspan="2">Apreciation conseil de classe: <b>Tres bon boulot</b></td>
+            <td colspan="2">Apreciation conseil de classe:
+                <b>
+                    @php
+                        if ($moySem>=14 and $moySem<16) {
+                            echo 'Bon Travail';
+                        }elseif ($moySem>=16 and $moySem<18) {
+                            echo 'Trés Bon Travail';
+                        }elseif ($moySem>=18 and $moySem<20) {
+                            echo 'Excelent Travail';
+                        }
+                    @endphp
+                </b>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table border="1" style="text-align: center; width: 100%">
+        <tr>
+            <td rowspan="2">Recapitulatifs des unités</td>
+            @php
+                for ($i=1; $i < $totalUe+1 ; $i++) {
+                    echo "<td><b>UE $i</b></td>";
+                }
+            @endphp
+        </tr>
+        <tr>
+            @php
+                for ($i=0; $i < count($tabRecap) ; $i++) {
+                    echo "<td><b> $tabRecap[$i]</b></td>";
+                }
+            @endphp
+        </tr>
+        <tr>
+            <td> Validations</td>
+            @php
+                for ($i=0; $i < count($tabRecap) ; $i++) {
+                    if ($tabRecap[$i] >= 10 and $tabRecap[$i] <=20 ) {
+                        echo '<td class="validate" bgcolor="blue">Validé</td>';
+                    }elseif ($tabRecap[$i] < 10) {
+
+                        echo '<td class="validate" bgcolor="red">Non Validé</td>';
+                        # c
+                    }
+                }
+            @endphp
+        </tr>
+        <tr>
+            <td>Crédits obtenus</td>
+            @php
+                for ($i=0; $i < count($tabCredit) ; $i++) {
+                    echo "<td><b> $tabCredit[$i]</b></td>";
+                }
+            @endphp
         </tr>
     </table>
     <br>
@@ -166,6 +305,13 @@
             <td style="width: 200px"> <span class="ue-ratrap"></span> UE validé en rattrapage</td>
         </tr>
     </table>
+
+    <p style="margin-left: 65%; margin-top: 2%"><u>Directeur des etudes</u></p>
+    <p style="margin-left: 65%; margin-top: 2%"><u>Cache & Signature</u></p>
+
+    <p style="margin-top: 40px;">Sicap Mermoz LM 7648 Dakar Fann Eamil: uniprosenegal@gmail.com Web site: wwww.uni-prosenegal.com</p>
+
+
 
 </body>
 </html>

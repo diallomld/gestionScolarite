@@ -18,9 +18,6 @@ class Note extends Model
         'idec',
         'note',
     ];
-    public function ec(){
-        return $this->belongsTo(Ec::class, 'idec');
-    }
 
     public function evaluation(){
         return $this->belongsTo(Evaluation::class, 'idevaluation');

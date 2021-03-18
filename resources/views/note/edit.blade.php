@@ -18,19 +18,6 @@
                         </ul>
                     </div>
                 @endif  }} --}}
-
-                <div class="form-group">
-                  <label for="idec">Nom Ec</label>
-
-                  <select name="idec" class="form-control @error('idec') is-invalid @enderror" id="idec">
-                    @foreach ($ecs as $ec)
-                        <option value="{{ $ec->idec }}">{{ $ec->nomec }}</option>
-                    @endforeach
-                  </select>
-                  @error('idec')
-                        <div class="alert alert-danger"> {{$message}} </div>
-                    @enderror
-                </div>
                 <div class="form-group">
                     <label for="note">Note</label>
                     <input name="note" value="{{ $note->note }}" class="form-control @error('note') is-invalid @enderror" id="note">

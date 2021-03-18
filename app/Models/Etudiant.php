@@ -43,4 +43,10 @@ class Etudiant extends Model
     public function notes(){
         return $this->belongsTo(Note::class, 'matricule');
     }
+
+    public function moy(){
+
+        return 102;
+
+    }
 }

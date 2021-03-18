@@ -52,6 +52,7 @@ class PaimentController extends Controller
             'mois' => ['required'],
             'datepaiement' => ['required', 'date'],
             'montant' => ['required','numeric'],
+            'libelle' => ['required'],
             'observation' => ['required','min:3'],
         ]);
 
@@ -62,13 +63,15 @@ class PaimentController extends Controller
         $paiement->idmodepaiement = $request->modepaiement;
         $paiement->datepaiement = $request->datepaiement;
         $paiement->observation = $request->observation;
+        $paiement->libelle = $request->libelle;
         $paiement->mois = json_encode($request->mois);
 
         $paiement->montant = $request->montant;
 
         $paiement->save();
 
-        return redirect()->route('paiement.index')->with('success','Paiement ajouter avec succees');
+        return redirect()->route('recu', $paiement);
+        //return redirect()->route('paiement.index')->with('success','Paiement ajouter avec succees');
 
     }
 
@@ -114,12 +117,14 @@ class PaimentController extends Controller
             'mois' => ['required'],
             'datepaiement' => ['required', 'date'],
             'montant' => ['required','numeric'],
+            'libelle' => ['required'],
             'observation' => ['required','min:3'],
         ]);
         $paiement->matricule = $request->matricule;
         $paiement->idmodepaiement = $request->modepaiement;
         $paiement->datepaiement = $request->datepaiement;
         $paiement->observation = $request->observation;
+        $paiement->libelle = $request->libelle;
         $paiement->mois = json_encode($request->mois);
         $paiement->montant = $request->montant;
 

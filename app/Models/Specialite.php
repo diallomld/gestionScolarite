@@ -24,7 +24,7 @@ class Specialite extends Model
         return $this->belongsTo(Mention::class,'idmention');
     }
     public function uniteEnseignements(){
-        return $this->belongsTo(Ue::class,'idfiliere');
+        return $this->hasMany(Ue::class,'idfiliere');
     }
 
     public function classes(){

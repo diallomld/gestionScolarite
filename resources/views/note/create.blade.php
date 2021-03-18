@@ -25,21 +25,10 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="idec">Selectionner l'ec</label>
-                    <select name="idec" class="form-control @error('idec') is-invalid @enderror" id="idec">
-                      @foreach ($ecs as $ec)
-                          <option value="{{ $ec->idec }}">{{ $ec->nomec }}</option>
-                      @endforeach
-                    </select>
-                    @error('idec')
-                        <div class="alert alert-danger"> {{$message}} </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="idevaluation">Selectionner le type d'evaluation</label>
+                    <label for="idevaluation">Selectionner l'evaluation</label>
                     <select name="idevaluation" class="form-control @error('idevaluation') is-invalid @enderror" id="idevaluation">
                       @foreach ($evaluations as $eva)
-                          <option value="{{ $eva->idevaluation }}">{{ $eva->typeevaluation }}</option>
+                          <option value="{{ $eva->idevaluation }}">{{ $eva->ec->nomec }}- {{ $eva->typeevaluation }}</option>
                       @endforeach
                     </select>
                     @error('idevaluation')

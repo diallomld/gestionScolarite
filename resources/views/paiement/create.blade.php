@@ -65,13 +65,23 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                  <label for="libelle">libelle</label>
+                  <select name="libelle" class="form-control">
+                    <option value="Mensualite">Mensualite</option>
+                    <option value="Inscription">Inscription</option>
+                  </select>
+                     @error('libelle')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
+                <div class="form-group">
                   <label for="observation">Observation</label>
                   <textarea name="observation" class="form-control @error('observation') is-invalid @enderror" id="observation">Observation...</textarea>
                     @error('observation')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Ajouter un paiement</button>
+                <button type="submit" class="btn btn-primary">Enrigistrer & imprimer le paiement <i class="fa fa-print"></i></button>
             </form>
           </div>
         </div>

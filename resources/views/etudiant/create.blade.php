@@ -71,9 +71,16 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="telephone">Date Naissance</label>
+                    <label for="datenaissance">Date Naissance</label>
                     <input type="date" name="datenaissance" class="form-control @error('datenaissance') is-invalid @enderror" id="datenaissance" placeholder="Entrer la date de naissance">
                     @error('datenaissance')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="lieu">Lieu de Naissance</label>
+                    <input type="text" name="lieu" class="form-control @error('lieu') is-invalid @enderror" id="lieu" placeholder="Entrer le lieu de naissance">
+                    @error('lieu')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>

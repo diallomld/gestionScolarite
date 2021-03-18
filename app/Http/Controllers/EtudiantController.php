@@ -47,6 +47,7 @@ class EtudiantController extends Controller
             'teltuteur' => ['required'],
             'nomtuteur' => ['required'],
             'datenaissance' => ['required','date'],
+            'lieu' => ['required'],
             'genre' => ['required'],
             'disponibilite' => ['required'],
         ]);
@@ -60,6 +61,7 @@ class EtudiantController extends Controller
         $etudiant->teltuteur = $validated['teltuteur'];
         $etudiant->nomtuteur = $validated['nomtuteur'];
         $etudiant->datenaissance = $validated['datenaissance'];
+        $etudiant->lieu = $validated['lieu'];
         $etudiant->genre = $validated['genre'];
         $etudiant->disponibilite = $validated['disponibilite'];
 
@@ -110,6 +112,7 @@ class EtudiantController extends Controller
             'nomtuteur' => ['required'],
             'datenaissance' => ['required','date'],
             'genre' => ['required'],
+            'lieu' => ['required'],
             'disponibilite' => ['required'],
         ]);
 
@@ -121,6 +124,7 @@ class EtudiantController extends Controller
         $etudiant->teltuteur = $validated['teltuteur'];
         $etudiant->nomtuteur = $validated['nomtuteur'];
         $etudiant->datenaissance = $validated['datenaissance'];
+        $etudiant->lieu = $validated['lieu'];
         $etudiant->genre = $validated['genre'];
         $etudiant->disponibilite = $validated['disponibilite'];
 

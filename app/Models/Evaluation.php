@@ -30,8 +30,8 @@ class Evaluation extends Model
     public function semestre(){
         return $this->belongsTo(Semestre::class, 'idsemestre');
     }
-    
-    public function notes(){
-        return $this->hasMany(Note::class, 'idevaluation');
+
+    public function note(){
+        return $this->hasOne(Note::class, 'idevaluation');
     }
 }

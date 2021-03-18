@@ -19,7 +19,7 @@
                     </div>
                 @endif  }} --}}
 
-                
+
                 <div class="form-group">
                     <label for="nom">Nom</label>
                     <input name="nom" value="{{ $etudiant->nom }}" class="form-control @error('nom') is-invalid @enderror" id="libelleetudiant">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label for="anneescolaire">Nationnalite</label>
-  
+
                     <select name="idnationnalite" class="form-control @error('idanneescolaire') is-invalid @enderror" id="idanneescolaire">
                       <option value="{{ $etudiant->nationnalite->idnationnalite }}">{{ $etudiant->nationnalite->nom }}</option>
                       @foreach ($nationnalites as $nationnalite)
@@ -63,7 +63,7 @@
                       <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
-                
+
                 <div class="form-group">
                     <label for="teltuteur">Telephone Tuteur</label>
                     <input name="teltuteur" value="{{ $etudiant->teltuteur }}" class="form-control @error('teltuteur') is-invalid @enderror" id="libelleetudiant">
@@ -79,9 +79,16 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="nomtuteur">Date Naissance</label>
+                    <label for="datenaissance">Date Naissance</label>
                     <input type="date" name="datenaissance" value="{{ $etudiant->datenaissance }}" class="form-control @error('datenaissance') is-invalid @enderror" id="libelleetudiant">
                     @error('datenaissance')
+                      <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="lieu">Lieu Naissance</label>
+                    <input type="text" name="lieu" value="{{ $etudiant->lieu }}" class="form-control @error('lieu') is-invalid @enderror" id="libelleetudiant">
+                    @error('lieu')
                       <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>

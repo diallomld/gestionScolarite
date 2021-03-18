@@ -44,7 +44,6 @@ class NoteController extends Controller
     {
         $validated = $request->validate([
             'note' => ['required'],
-            'idec' => ['required','exists:"\App\Models\Ec","idec'],
             'matricule' => ['required','exists:"\App\Models\Etudiant","matricule'],
             'idevaluation' => ['required','exists:"\App\Models\Evaluation","idevaluation'],
         ]);
@@ -52,7 +51,6 @@ class NoteController extends Controller
         $note = new Note();
 
         $note->note = $validated['note'];
-        $note->idec = $validated['idec'];
         $note->idevaluation = $validated['idevaluation'];
         $note->matricule = $validated['matricule'];
 
@@ -94,12 +92,10 @@ class NoteController extends Controller
     {
         $validated = $request->validate([
             'note' => ['required'],
-            'idec' => ['required','exists:"\App\Models\ec","idec'],
         ]);
 
         //dd($request->all());
         $note->note = $validated['note'];
-        $note->idec = $validated['idec'];
 
         $note->update();
         return redirect()->route('note.index')->with('success',' la note a ete modifier avec succes');

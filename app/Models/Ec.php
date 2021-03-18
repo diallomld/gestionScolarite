@@ -30,10 +30,7 @@ class Ec extends Model
     public function cours(){
         return $this->hasMany(Cour::class,'idcours');
     }
-    public function evaluation(){
+    public function evaluations(){
         return $this->hasMany(Evaluation::class,'idec');
-    }
-    public function notes(){
-        return $this->hasMany(Note::class,'idnote');
     }
 }

@@ -36,6 +36,7 @@
                                 <th>Telephone Tuteur</th>
                                 <th>Nom Tuteur</th>
                                 <th>Date Naissance</th>
+                                <th>Lieu de Naissance</th>
                                 <th>Genre</th>
                                 <th>Disponibilite</th>
                                 <th>Action</th>
@@ -53,6 +54,7 @@
                                 <th>Telephone Tuteur</th>
                                 <th>Nom Tuteur</th>
                                 <th>Date Naissance</th>
+                                <th>Lieu de Naissance</th>
                                 <th>Genre</th>
                                 <th>Disponibilite</th>
                                 <th>Action</th>
@@ -71,6 +73,7 @@
                                 <th>{{ $etudiant->teltuteur }}</th>
                                 <th>{{ $etudiant->nomtuteur }}</th>
                                 <th>{{ $etudiant->datenaissance }}</th>
+                                <th>{{ $etudiant->lieu }}</th>
                                 <th>{{ $etudiant->genre }}</th>
                                 <th>{{ $etudiant->disponibilite }}</th>
                                 <th class="btn btn-primary"><a class="btn-primary" href="{{ route('etudiant.edit', $etudiant->matricule ) }}">Modifier</a></th>

@@ -33,6 +33,7 @@
                                 <th>Montant</th>
                                 <th>Date Paiement</th>
                                 <th>Mois</th>
+                                <th>Libelle</th>
                                 <th>Observation</th>
                                 <th style="width: 200px;">Action</th>
                             </tr>
@@ -45,6 +46,7 @@
                                 <th>Montant</th>
                                 <th>Date Paiement</th>
                                 <th>Mois</th>
+                                <th>Libelle</th>
                                 <th>Observation</th>
                                 <th style="width: fit-content;">Action</th>
                             </tr>
@@ -66,6 +68,7 @@
                                     @endif
                                 @endforeach
                                 </td>
+                                <td>{{ $paiement->libelle }}</td>
                                 <td>{{ $paiement->observation }}</td>
                                 <td >
                                     <a class="btn-primary" href="{{ route('paiement.edit', $paiement->idpaiement ) }}">Modifier</a>

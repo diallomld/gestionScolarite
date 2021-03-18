@@ -32,6 +32,7 @@ class RapportController extends Controller
         $logo = base_path()."\logo.jpg";
         //dd($logo);
         $etudiant = Etudiant::findOrFail($id);
+
         $pdf = PDF::loadView('rapport.bulletin', compact('etudiant', 'logo'));
 
         return $pdf->stream();
