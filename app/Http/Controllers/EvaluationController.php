@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classe;
 use App\Models\Ec;
 use App\Models\Evaluation;
+use App\Models\Semestre;
 use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
@@ -29,7 +30,8 @@ class EvaluationController extends Controller
     {
         $ecs = Ec::all();
         $classes = Classe::all();
-        return view('evaluation.create', compact('ecs','classes'));
+        $semestres = Semestre::all();
+        return view('evaluation.create', compact('ecs','classes','semestres'));
     }
 
     /**
@@ -44,6 +46,7 @@ class EvaluationController extends Controller
 
             'idec' => ['required','exists:"App\Models\Ec",idec'],
             'numero' => ['required','exists:"App\Models\Classe",numero'],
+            'idsemestre' => ['required','exists:"App\Models\Semestre",idsemestre'],
             'dateevaluation' => ['required'],
             'typeevaluation' => ['required'],
 
@@ -52,6 +55,7 @@ class EvaluationController extends Controller
         $evaluation = new Evaluation();
         $evaluation->idec = $validated['idec'];
         $evaluation->numero = $validated['numero'];
+        $evaluation->idsemestre = $validated['idsemestre'];
         $evaluation->dateevaluation = $validated['dateevaluation'];
         $evaluation->typeevaluation = $validated['typeevaluation'];
 
@@ -81,7 +85,8 @@ class EvaluationController extends Controller
     {
         $ecs = Ec::all();
         $classes = Classe::all();
-        return view('evaluation.edit',compact('evaluation','ecs','classes'));
+        $semestres = Semestre::all();
+        return view('evaluation.edit',compact('evaluation','ecs','classes','semestres'));
     }
 
     /**
@@ -97,6 +102,7 @@ class EvaluationController extends Controller
 
             'idec' => ['required','exists:"App\Models\Ec",idec'],
             'numero' => ['required','exists:"App\Models\Classe",numero'],
+            'idsemestre' => ['required','exists:"App\Models\Semestre",idsemestre'],
             'dateevaluation' => ['required'],
             'typeevaluation' => ['required'],
 
@@ -104,6 +110,7 @@ class EvaluationController extends Controller
 
         $evaluation->idec = $validated['idec'];
         $evaluation->numero = $validated['numero'];
+        $evaluation->idsemestre = $validated['idsemestre'];
         $evaluation->dateevaluation = $validated['dateevaluation'];
         $evaluation->typeevaluation = $validated['typeevaluation'];
 

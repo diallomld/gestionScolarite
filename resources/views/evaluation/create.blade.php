@@ -63,6 +63,17 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="idsemestre">semestre</label>
+                    <select name="idsemestre" class="form-control @error('idsemestre') is-invalid @enderror" id="idsemestre">
+                      @foreach ($semestres as $semestre)
+                          <option value="{{ $semestre->idsemestre }}">{{ $semestre->libellesemestre }}</option>
+                      @endforeach
+                    </select>
+                    @error('idsemestre')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
                 <button type="submit" class="btn btn-primary">Ajouter l'evaluation</button>
             </form>
           </div>

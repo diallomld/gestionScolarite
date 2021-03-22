@@ -44,7 +44,7 @@
     </style>
 </head>
 <body>
-    <table style="width: 100%; border: solid">
+    <table style="width: 100%; border: solid; margin-top: 0px;">
         <tr>
             <td>
                 <img src="{{ $logo }}" alt="logo"/>
@@ -106,6 +106,8 @@
             $moySemestre = 0;
             $tabRecap = [];
             $tabCredit = [];
+            $totalCredit = 0;
+            $totalUe = 0;
             ?>
         @foreach ($etudiant->inscription->classe->filiere->uniteEnseignements as $ues)
 
@@ -116,44 +118,73 @@
                 $somme = 0;
                 $sommeCoef = 0;
                 $sommeMoyUe = 0;
-                $totalCredit = 0;
-                $totalUe = 0;
+                $devoir = 0;
+                $examen = 0;
              ?>
             @foreach ($ues->ecs as $ec)
                 <tr>
                     <td style="150px"> <b>{{ $ec->nomec}}</b></td>
                    @foreach ($ec->evaluations as $eva)
 
-                   <td> <?php if (isset($eva->note->note)) {
-                       echo $eva->note->note;
-                   } else {
-                       echo '0';
-                   }
-                    ?> </td>
+                        @if (count($ec->evaluations)==1 )
+                            @if ($eva->typeevaluation=="devoir" && isset($eva->note->note))
+                                <?php
+                                    echo "<td>".$eva->note->note."</td>";
+                                    $devoir=$eva->note->note;
+                                ?>
+                                <td></td>
+                            @elseif ($eva->typeevaluation=="examen" && isset($eva->note->note))
+                                <td></td>
+                                <?php
+                                    echo "<td>".$eva->note->note."</td>";
+                                    $examen=$eva->note->note;
+                                ?>
+                            @else
+                                @php
+                                    echo "<td></td>";
+                                    $rattrap = $eva->note->note;
+                                @endphp
+                            @endif
+                        @elseif (count($ec->evaluations) == 2)
+                            @if ($eva->typeevaluation=="devoir" && isset($eva->note->note))
+                                <?php
+                                    echo "<td>".$eva->note->note."</td>";
+                                    $devoir=$eva->note->note;
+                                ?>
+                            @elseif ($eva->typeevaluation=="examen" && isset($eva->note->note))
 
-                    @if ($eva->typeevaluation=="devoir")
-                        <?php
-                            $devoir=$eva->note->note;
-                        ?>
-                    @elseif ($eva->typeevaluation=="examen")
-                        @php
-                            $examen = $eva->note->note;
-                        @endphp
-                    @else
-                        @php
-                            $rattrap = $eva->note->note;
-                        @endphp
-                    @endif
+                                <?php
+                                    echo "<td>".$eva->note->note."</td>";
+                                    $examen=$eva->note->note;
+                                ?>
+                            @else
+                                @php
+                                    echo "<td></td>";
+                                    $rattrap = $eva->note->note;
+                                @endphp
+                            @endif
+                        @else
+                            <td></td>
+                            <td></td>
+                        @endif
+
                    @endforeach
                     <td></td>
                     <td>
                         <?php
-                            if (!isset($devoir) || !isset($examen)) {
-
-                            } else {
+                            if (isset($devoir) and isset($examen)) {
+                                //echo 'vide';
                                 $moy = $devoir*0.4 + $examen*0.6;
                                 $sommeMoyUe+=$moy;
-                                echo $moy;
+                                echo number_format($moy,2,'.',' ');
+                            } elseif (isset($devoir) and !isset($examen)) {
+                                $moy = $devoir*0.4;
+                                $sommeMoyUe+=$moy;
+                                echo number_format($moy,2,'.',' ');
+                            }elseif (!isset($devoir) and isset($examen)) {
+                                $moy = $examen*0.6;
+                                $sommeMoyUe+=$moy;
+                                echo number_format($moy,2,'.',' ');
                             }
 
                         ?>
@@ -167,11 +198,13 @@
                         ?>
                     </td>
                     <td>
-                        <?php
-                            $moyCoef = $moy*$credit;
+                        @php
+                            //echo $round."|".$moy."=>";
+                            $moyCoef = $moy*$round;
                             $sommeCoef+=$moyCoef;
                             echo number_format($moyCoef,2,'.',' ');
-                        ?>
+
+                        @endphp
                     </td>
                     <td></td>
                     <td></td>
@@ -188,7 +221,7 @@
                             }elseif ($moy>=18 and $moy<=20) {
                                 echo "Excelent";
                             }else {
-                                echo 'ko';
+                                echo 'Non validé';
                             }
                         ?>
                     </td>
@@ -210,7 +243,13 @@
                         echo number_format($divider,3,'.',' ');
                     ?>
                 </td>
-                <td>Validé</td>
+                <td>
+                @if ($divider >=10)
+                    validé
+                @else
+                    Non validé
+                @endif
+                </td>
             </tr>
         @endforeach
     </table>
@@ -272,6 +311,9 @@
 
                         echo '<td class="validate" bgcolor="red">Non Validé</td>';
                         # c
+                    }else {
+                        echo '<td class="validate" bgcolor="red">Erreur</td>';
+
                     }
                 }
             @endphp
@@ -309,7 +351,7 @@
     <p style="margin-left: 65%; margin-top: 2%"><u>Directeur des etudes</u></p>
     <p style="margin-left: 65%; margin-top: 2%"><u>Cache & Signature</u></p>
 
-    <p style="margin-top: 40px;">Sicap Mermoz LM 7648 Dakar Fann Eamil: uniprosenegal@gmail.com Web site: wwww.uni-prosenegal.com</p>
+    <p style="margin-top: 5px;">Sicap Mermoz LM 7648 Dakar Fann Eamil: uniprosenegal@gmail.com Web site: wwww.uni-prosenegal.com</p>
 
 
 

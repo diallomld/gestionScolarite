@@ -1,10 +1,6 @@
 @extends('master')
 
 @section('content')
-    @php
-        $test = "alert";
-    @endphp
-    {{ dump($test) }}
     <div class="row col-lg-12">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">

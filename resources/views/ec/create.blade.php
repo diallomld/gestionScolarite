@@ -37,28 +37,28 @@
                 </div>
                 <div class="form-group">
                   <label for="cm">Cours magistral (CM)</label>
-                  <input type="number" name="cm" class="form-control @error('cm') is-invalid @enderror" id="cm" placeholder="Entrer cm..">
+                  <input type="number" name="cm" class="form-control @error('cm') is-invalid @enderror" id="cm" placeholder="Entrer le nombre d'heure">
                     @error('cm')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
                 <div class="form-group">
                   <label for="sigleec">Sigle EC</label>
-                  <input type="text" name="sigleec" class="form-control @error('sigleec') is-invalid @enderror" id="sigleec" placeholder="Entrer la specialite">
+                  <input type="text" name="sigleec" class="form-control @error('sigleec') is-invalid @enderror" id="sigleec" placeholder="Entrer le sigle">
                     @error('sigleec')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
                 <div class="form-group">
                   <label for="td">TD</label>
-                  <input type="number" name="td" class="form-control @error('td') is-invalid @enderror" id="td" placeholder="Entrer la specialite">
+                  <input type="number" name="td" class="form-control @error('td') is-invalid @enderror" id="td" placeholder="Entrer le nombre d'heure">
                     @error('td')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
                 <div class="form-group">
                   <label for="tpe">TPE</label>
-                  <input type="number" name="tpe" class="form-control @error('tpe') is-invalid @enderror" id="tpe" placeholder="Entrer la specialite">
+                  <input type="number" name="tpe" class="form-control @error('tpe') is-invalid @enderror" id="tpe" placeholder="Entrer le nombre d'heure">
                     @error('tpe')
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror

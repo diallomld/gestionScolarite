@@ -30,6 +30,7 @@
                                 <th>id</th>
                                 <th>Ec</th>
                                 <th>Nom Classe</th>
+                                <th>Semestre</th>
                                 <th>Date Evaluation </th>
                                 <th>Type Evaluation</th>
                                 <th>Action</th>
@@ -41,6 +42,7 @@
                                 <th>id</th>
                                 <th>Ec</th>
                                 <th>Nom Class</th>
+                                <th>Semestre</th>
                                 <th>Date Evaluation </th>
                                 <th>Type Evaluation</th>
                                 <th>Action</th>
@@ -53,8 +55,9 @@
                                 <th> {{ $evaluation->idevaluation }} </th>
                                 <th>{{ $evaluation->ec->nomec }}</th>
                                 <th>{{ $evaluation->classe->nomclasse }}</th>
+                                <th>{{ $evaluation->semestre->libellesemestre }}</th>
                                 <th>{{ $evaluation->dateevaluation }}</th>
-                                <th>{{ $evaluation->typeevaluation }}</th>                             
+                                <th>{{ $evaluation->typeevaluation }}</th>
                                 <th class="btn btn-primary"><a class="btn-primary" href="{{ route('evaluation.edit', $evaluation->idevaluation ) }}">Modifier</a></th>
 
                                 <form action="{{ route('evaluation.destroy', $evaluation->idevaluation ) }}" method="post">

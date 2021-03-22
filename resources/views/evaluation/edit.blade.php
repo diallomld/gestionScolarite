@@ -19,7 +19,7 @@
                     </div>
                 @endif  }} --}}
 
-                
+
                 <div class="form-group">
                     <label for="dateevaluation">Date valuation</label>
                     <input name="dateevaluation" value="{{ $evaluation->dateevaluation }}" class="form-control @error('dateevaluation') is-invalid @enderror" id="libelleevaluation">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label for="anneescolaire">Ec</label>
-  
+
                     <select name="idec" class="form-control @error('idec') is-invalid @enderror" id="idec">
                       <option value="{{ $evaluation->ec->idec }}">{{ $evaluation->ec->nomec }}</option>
                       @foreach ($ecs as $ec)
@@ -48,7 +48,9 @@
                     @error('idec')
                           <div class="alert alert-danger"> {{$message}} </div>
                       @enderror
-                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="numero">Classe</label>
                     <select name="numero" class="form-control @error('numero') is-invalid @enderror" id="numero">
                       <option value="{{ $evaluation->classe->numero }}">{{ $evaluation->classe->nomclasse }}</option>
                       @foreach ($classes as $classe)
@@ -57,7 +59,21 @@
                     @endif
                       @endforeach
                     </select>
-                    @error('classe')
+                    @error('numero')
+                          <div class="alert alert-danger"> {{$message}} </div>
+                      @enderror
+                  </div>
+                <div class="form-group">
+                    <label for="idsemestre">Semestre</label>
+                    <select name="idsemestre" class="form-control @error('idsemestre') is-invalid @enderror" id="idsemestre">
+                      <option value="{{ $evaluation->semestre->idsemestre }}">{{ $evaluation->semestre->libellesemestre }}</option>
+                      @foreach ($semestres as $semestre)
+                      @if($evaluation->semestre->libellesemestre != $semestre->libellesemestre )
+                      <option value="{{ $semestre->idsemestre }}">{{ $semestre->libellesemestre }}</option>
+                    @endif
+                      @endforeach
+                    </select>
+                    @error('idsemestre')
                           <div class="alert alert-danger"> {{$message}} </div>
                       @enderror
                   </div>

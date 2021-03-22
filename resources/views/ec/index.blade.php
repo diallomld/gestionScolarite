@@ -28,21 +28,24 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>EC</th>
+                                <th>Ue</th>
                                 <th>CM</th>
                                 <th>Nom EC</th>
                                 <th>Sigle EC</th>
                                 <th>TD</th>
                                 <th>TPE</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>id</th>
-                                <th>Filiere</th>
-                                <th>Desc Uea</th>
-                                <th>Type Uea</th>
-                                <th>Sigle Uea</th>
+                                <th>Ue</th>
+                                <th>CM</th>
+                                <th>Nom EC</th>
+                                <th>Sigle EC</th>
+                                <th>TD</th>
+                                <th>TPE</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
