@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bulletins de note semestre 1</title>
+    <title>Bulletins de note semestre 2</title>
     <style>
         .validate{
             color: white;
@@ -52,7 +52,7 @@
             <td style="padding-left: 230px; float: right; text-align: center; width: 100%">
                 <table border="1px">
                     <tr>
-                        <td colspan="2" style="text-align: center; font-size: 30px; color: white; height: 30; background: #1809e6">Bulletin de notes <br>{{ $etudiant->inscription->annee->semestres[0]->libellesemestre}} </td>
+                        <td colspan="2" style="text-align: center; font-size: 30px; color: white; height: 30; background: #1809e6">Bulletin de notes <br> {{ $semestres[0]->libellesemestre}} </td>
                     </tr>
                     <tr>
                         <td>Annee accademique</td>
@@ -124,57 +124,66 @@
             @foreach ($ues->ecs as $ec)
                 <tr>
                     <td style="150px"> <b>{{ $ec->nomec}}</b></td>
-                   @foreach ($ec->evaluations as $eva)
+                    @if (count($ec->evaluations) -2 == 0)
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    @else
+                        @foreach ($ec->evaluations as $eva)
 
-                        @if ($eva->semestre->libellesemestre == 'semestre 1')
-                            @if (count($ec->evaluations)==1 )
-                                @if ($eva->typeevaluation=="devoir" && isset($eva->note->note))
-                                    <?php
-                                        echo "<td>".$eva->note->note."</td>";
-                                        $devoir=$eva->note->note;
-                                    ?>
-                                    <td></td>
-                                @elseif ($eva->typeevaluation=="examen" && isset($eva->note->note))
-                                    <td></td>
-                                    <?php
-                                        echo "<td>".$eva->note->note."</td>";
-                                        $examen=$eva->note->note;
-                                    ?>
+                            @if ($eva->semestre->libellesemestre == "semestre 2")
+                                @if (count($ec->evaluations) - 2 == 1)
+                                    @if ($ec->evaluations[2]->typeevaluation=="devoir" && isset($eva->note->note))
+                                        <?php
+                                            echo "<td>".$eva->note->note."</td>";
+                                            $devoir=$eva->note->note;
+                                        ?>
+                                        <td></td>
+                                    @elseif ($ec->evaluations[2]->typeevaluation=="examen" && isset($eva->note->note))
+                                        <td></td>
+                                        <?php
+                                            echo "<td>".$eva->note->note."</td>";
+                                            $examen=$eva->note->note;
+                                        ?>
+                                    @else
+                                        @php
+                                            echo "<td></td>";
+                                            $rattrap = $eva->note->note;
+                                        @endphp
+                                    @endif
+
+                                @elseif (count($ec->evaluations) -2 >= 2)
+                                    @if ($ec->evaluations[2]->typeevaluation=="examen" && isset($ec->evaluations[2]->note->note))
+
+
+                                        @php
+                                            $devoir = $ec->evaluations[3]->note->note;
+                                            $examen = $ec->evaluations[2]->note->note;
+                                        @endphp
+                                        <td>{{ $devoir}}</td>
+                                        <td>{{ $examen}}</td>
+                                    @elseif($ec->evaluations[2]->typeevaluation=="devoir" && isset($eva->note->note))
+                                        @php
+                                            $devoir = $ec->evaluations[2]->note->note;
+                                            $examen = $ec->evaluations[3]->note->note?:' ';
+                                        @endphp
+                                        <td>{{ $devoir}}</td>
+                                        <td>{{ $examen}}</td>
+                                    @else
+                                        @php
+                                            echo "<td></td><td></td>";
+                                            //$rattrap = $eva->note->note;
+                                        @endphp
+                                    @endif
                                 @else
-                                    @php
-                                        echo "<td></td>";
-                                        $rattrap = $eva->note->note;
-                                    @endphp
+                                    <td></td>
+                                    <td></td>
                                 @endif
-                            @elseif (count($ec->evaluations) >= 2)
-                                @if ($eva->typeevaluation=="examen" && isset($eva->note->note) && $loop->index == 0)
-                                    @php
-                                        $devoir = $ec->evaluations[$loop->index + 1]->note->note;
-                                        $examen = $ec->evaluations[$loop->index]->note->note;
-                                    @endphp
-                                    <td>{{ $devoir}}</td>
-                                    <td>{{ $examen}}</td>
-                                @elseif($eva->typeevaluation=="devoir" && isset($eva->note->note) && $loop->index == 0)
-                                    @php
-                                        $devoir = $ec->evaluations[$loop->index]->note->note;
-                                        $examen = $ec->evaluations[$loop->index + 1]->note->note;
-                                    @endphp
-                                    <td>{{ $devoir}}</td>
-                                    <td>{{ $examen}}</td>
-                                @else
-                                    @php
-                                        echo "<td></td>";
-                                        $rattrap = $eva->note->note;
-                                    @endphp
-                                @endif
-                            @else
-                                <td></td>
-                                <td></td>
+                                @break
                             @endif
-                            @break
-                        @endif
-                   @endforeach
-                    <td></td>
+                        @endforeach
+                        <td></td>
+                    @endif
                     <td>
                         <?php
                             if (isset($devoir) and isset($examen)) {
@@ -283,6 +292,8 @@
                             echo 'Trés Bon Travail';
                         }elseif ($moySem>=18 and $moySem<20) {
                             echo 'Excelent Travail';
+                        }else {
+                            echo 'Beaucoup d\'effort a faire';
                         }
                     @endphp
                 </b>

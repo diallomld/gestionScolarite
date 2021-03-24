@@ -84,3 +84,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //Route::get('pdf', [RecuController::class,'createPDF'])->name('recu');
 Route::get('recu/{id}', [RapportController::class,'recu'])->name('recu');
 Route::get('bulletin/{id}', [RapportController::class,'bulletin'])->name('bulletin');
+Route::get('bulletin2/{id}', [RapportController::class,'bulletin2'])->name('bulletin2');

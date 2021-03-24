@@ -28,7 +28,7 @@
                     <label for="idevaluation">Selectionner l'evaluation</label>
                     <select name="idevaluation" class="form-control @error('idevaluation') is-invalid @enderror" id="idevaluation">
                       @foreach ($evaluations as $eva)
-                          <option value="{{ $eva->idevaluation }}">{{ $eva->ec->nomec }}- {{ $eva->typeevaluation }}</option>
+                          <option value="{{ $eva->idevaluation }}">{{ $eva->ec->nomec }}-{{ $eva->typeevaluation }}-{{ $eva->semestre->libellesemestre }}</option>
                       @endforeach
                     </select>
                     @error('idevaluation')
