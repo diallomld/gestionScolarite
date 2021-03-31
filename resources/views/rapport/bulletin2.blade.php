@@ -41,6 +41,12 @@
             height: 15px;
             margin: 1 1 1 5px;
         }
+        .valid{
+            background: blue;
+            font-weight: bolder;
+            color:white;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -102,7 +108,16 @@
 
         </tr>
         <?php
-            $totalCredit = 0;
+            // semestre 1
+
+            $totalCredit1 = 0;
+            $moySemestre1 = 0;
+            $tabRecap1 = [];
+            $tabCredit1 = [];
+            $totalCredit1 = 0;
+            $totalUe1 = 0;
+
+            //$smestre 2 = 0;
             $moySemestre = 0;
             $tabRecap = [];
             $tabCredit = [];
@@ -111,10 +126,17 @@
             ?>
         @foreach ($etudiant->inscription->classe->filiere->uniteEnseignements as $ues)
 
-        <tr style="text-align: start">
-            <td colspan="10"><b>{{ $ues->descuea }}</b></td>
-        </tr>
-        <?php
+            <tr style="text-align: start">
+                <td colspan="10"><b>{{ $ues->descuea }}</b></td>
+            </tr>
+            <?php
+            // semestre 1
+                $somme1 = 0;
+                $sommeCoef1 = 0;
+                $sommeMoyUe1 = 0;
+                $devoir1 = 0;
+                $examen1 = 0;
+            // semestre 2
                 $somme = 0;
                 $sommeCoef = 0;
                 $sommeMoyUe = 0;
@@ -162,10 +184,10 @@
                                         @endphp
                                         <td>{{ $devoir}}</td>
                                         <td>{{ $examen}}</td>
-                                    @elseif($ec->evaluations[2]->typeevaluation=="devoir" && isset($eva->note->note))
+                                    @elseif($ec->evaluations[2]->typeevaluation=="devoir" && isset($ec->evaluations[2]->note->note))
                                         @php
                                             $devoir = $ec->evaluations[2]->note->note;
-                                            $examen = $ec->evaluations[3]->note->note?:' ';
+                                            $examen = $ec->evaluations[3]->note->note;
                                         @endphp
                                         <td>{{ $devoir}}</td>
                                         <td>{{ $examen}}</td>
@@ -179,6 +201,24 @@
                                     <td></td>
                                     <td></td>
                                 @endif
+
+
+
+                                @if ($ec->evaluations[0]->typeevaluation=="devoir" && isset($ec->evaluations[0]->note->note))
+                                    <?php
+                                        //echo "<td>".$eva->note->note."</td>";
+                                        $devoir1=$ec->evaluations[0]->note->note;
+                                        $exmaen1=$ec->evaluations[1]->note->note;
+                                    ?>
+                                @elseif ($ec->evaluations[0]->typeevaluation=="examen" && isset($ec->evaluations[0]->note->note))
+
+                                    <?php
+
+                                        $examen1=$ec->evaluations[0]->note->note;
+                                        $devoir1=$ec->evaluations[1]->note->note;
+                                    ?>
+                                @endif
+
                                 @break
                             @endif
                         @endforeach
@@ -186,6 +226,19 @@
                     @endif
                     <td>
                         <?php
+                            // semestre 1
+                            if (isset($devoir1) and isset($examen1)) {
+                                //echo 'vide';
+                                $moy1 = $devoir1*0.4 + $examen1*0.6;
+                                $sommeMoyUe1+=$moy1;
+                            } elseif (isset($devoir1) and !isset($examen1)) {
+                                $moy1 = $devoir1*0.4;
+                                $sommeMoyUe1+=$moy1;
+                            }elseif (!isset($devoir1) and isset($examen1)) {
+                                $moy1 = $examen1*0.6;
+                                $sommeMoyUe1+=$moy1;
+                            }
+                            // semestre 2
                             if (isset($devoir) and isset($examen)) {
                                 //echo 'vide';
                                 $moy = $devoir*0.4 + $examen*0.6;
@@ -205,6 +258,13 @@
                     </td>
                     <td>
                         <?php
+                        // semestre 1
+                        $credit1 = ($ec->cm + $ec->td + $ec->tpe)/20;
+                        $round1 = round($credit1,0,PHP_ROUND_HALF_UP);
+                        $somme1+= $round1;
+                        $moyCoef1 = $moy1*$round1;
+                        $sommeCoef1+=$moyCoef1;
+                        // semestre 2
                         $credit = ($ec->cm + $ec->td + $ec->tpe)/20;
                         $round = round($credit,0,PHP_ROUND_HALF_UP);
                         $somme+= $round;
@@ -216,6 +276,8 @@
                             //echo $round."|".$moy."=>";
                             $moyCoef = $moy*$round;
                             $sommeCoef+=$moyCoef;
+
+
                             echo number_format($moyCoef,2,'.',' ');
 
                         @endphp
@@ -248,6 +310,14 @@
                 <td><?php echo number_format($somme,2,'.',' '); ?></td>
                 <td>
                     <?php
+                        // semstre 1
+                        $totalCredit1+=$somme1;
+                        $divider1 = $sommeMoyUe1/count($ues->ecs);
+                        $moySemestre1+= $divider1;
+                        $tabRecap1[] = number_format($divider1,2,'.',' ');
+                        $tabCredit1[] = $somme1;
+                        $totalUe1+=1;
+                        // semestre 2
                         $totalCredit+=$somme;
                         $divider = $sommeMoyUe/count($ues->ecs);
                         $moySemestre+= $divider;
@@ -267,43 +337,62 @@
             </tr>
         @endforeach
     </table>
+    @php
+        $moySem = $moySemestre/$totalUe;
+    @endphp
+    <!-- start moy semestre 1 et 2 -->
 
-    <table border="1">
+    <table border="1" style="width: 580px; text-align: center;">
         <tr>
-            <td style="width: 580px;"><b>Total credit obtenus:</b></td>
-            <td style="color: #441adb; font-weight: bold; font-size: 30px"><?php echo number_format($totalCredit,2,'.',' ');?>/30</td>
+            <td rowspan="2" style="width: 120px;">Semestre 1</td>
+            <td>Crédits</td>
+            <td class="valid"><?php echo number_format($totalCredit,2,'.',' ');?>/30</td>
+            <td rowspan="2" style="width: 118px;">Semestre 2</td>
+            <td>Crédits</td>
+            <td class="valid"><?php echo number_format($totalCredit,2,'.',' ');?>/30</td>
+            <td style="width: 100px;">Total credits</td>
+            <td class="valid">60.00/60</td>
         </tr>
         <tr>
-            <td><b>Moyenne du Semestre</b></td>
-            <td style="color: #441adb; font-weight: bold; font-size: 30px">
+            <td>Moyenne</td>
+            <td class="valid">
                 @php
-                    $moySem = $moySemestre/$totalUe;
-                    echo number_format($moySem,2,'.',' ');
-                @endphp/20
+                    $moySem1 = $moySemestre1/$totalUe1;
+                    echo number_format($moySem1,2,'.',' ');
+                @endphp
+            </td>
+            <td>Moyenne</td>
+            <td class="valid">
+                @php
+                    echo number_format($moySem,2,'.',' ').'/20';
+                @endphp
+            </td>
+            <td style="width: 100px;">Moy General</td>
+            <td class="valid">
+                @php
+                    $moyGen = ($moySem1 + $moySem) / 2;
+                    echo number_format($moyGen,2,'.',' ').'/20';
+                @endphp
             </td>
         </tr>
         <tr>
-            <td colspan="2">Apreciation conseil de classe:
-                <b>
-                    @php
-                        if ($moySem>=14 and $moySem<16) {
-                            echo 'Bon Travail';
-                        }elseif ($moySem>=16 and $moySem<18) {
-                            echo 'Trés Bon Travail';
-                        }elseif ($moySem>=18 and $moySem<20) {
-                            echo 'Excelent Travail';
-                        }else {
-                            echo 'Beaucoup d\'effort a faire';
-                        }
-                    @endphp
-                </b>
+            <td colspan="8" style="text-align: start;">
+                Décision conseil de classe : Trés bon travail / Resultat: Admis(e) en classe supérieur
             </td>
         </tr>
     </table>
+    <!-- end moy semestre 1 et 2 -->
     <br>
     <table border="1" style="text-align: center; width: 100%">
+
         <tr>
-            <td rowspan="2">Recapitulatifs des unités</td>
+            <td rowspan="2">Recapitulatifs du 1er semestre</td>
+            @php
+                for ($i=1; $i < $totalUe1+1 ; $i++) {
+                    echo "<td><b>UE $i</b></td>";
+                }
+            @endphp
+            <td rowspan="2">Recapitulatifs du second semestre</td>
             @php
                 for ($i=1; $i < $totalUe+1 ; $i++) {
                     echo "<td><b>UE $i</b></td>";
@@ -312,13 +401,35 @@
         </tr>
         <tr>
             @php
+                // semestre 1
+                for ($i=0; $i < count($tabRecap1) ; $i++) {
+                    echo "<td><b> $tabRecap1[$i]</b></td>";
+                }
+            @endphp
+            @php
+                // semestre 2
                 for ($i=0; $i < count($tabRecap) ; $i++) {
                     echo "<td><b> $tabRecap[$i]</b></td>";
                 }
             @endphp
         </tr>
         <tr>
-            <td> Validations</td>
+            <td> Validations 1</td>
+            @php
+                for ($i=0; $i < count($tabRecap1) ; $i++) {
+                    if ($tabRecap1[$i] >= 10 and $tabRecap1[$i] <=20 ) {
+                        echo '<td class="validate" bgcolor="blue">Validé</td>';
+                    }elseif ($tabRecap1[$i] < 10) {
+
+                        echo '<td class="validate" bgcolor="red">Non Validé</td>';
+                        # c
+                    }else {
+                        echo '<td class="validate" bgcolor="red">Erreur</td>';
+
+                    }
+                }
+            @endphp
+            <td> Validations 2</td>
             @php
                 for ($i=0; $i < count($tabRecap) ; $i++) {
                     if ($tabRecap[$i] >= 10 and $tabRecap[$i] <=20 ) {
@@ -335,7 +446,13 @@
             @endphp
         </tr>
         <tr>
-            <td>Crédits obtenus</td>
+            <td>Crédits obtenus 1</td>
+            @php
+                for ($i=0; $i < count($tabCredit1) ; $i++) {
+                    echo "<td><b> $tabCredit1[$i]</b></td>";
+                }
+            @endphp
+            <td>Crédits obtenus 2</td>
             @php
                 for ($i=0; $i < count($tabCredit) ; $i++) {
                     echo "<td><b> $tabCredit[$i]</b></td>";
