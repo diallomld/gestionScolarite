@@ -11,7 +11,7 @@ class Profile extends Model
 
     protected $table = 'profiles';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $primaryKey = 'id';
 

@@ -7,6 +7,7 @@ use App\Models\Ec;
 use App\Models\Evaluation;
 use App\Models\Semestre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EvaluationController extends Controller
 {
@@ -17,7 +18,7 @@ class EvaluationController extends Controller
      */
     public function index()
     {
-        $evaluations = Evaluation::all();
+        $evaluations = Evaluation::with('ec','classe','semestre')->paginate(5);
         return view('evaluation.index', compact('evaluations'));
     }
 

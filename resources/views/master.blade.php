@@ -53,7 +53,7 @@
 
     <!-- Bootstrap core JavaScript-->
     @include('partials.footer-script')
-
+       @yield('js')
 </body>
 
 </html>

@@ -12,6 +12,7 @@
         "appzcoder/crud-generator": "^3.2",
         "barryvdh/laravel-dompdf": "^0.9.0",
         "codedge/laravel-fpdf": "^1.7",
+        "consoletvs/charts": "7.*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

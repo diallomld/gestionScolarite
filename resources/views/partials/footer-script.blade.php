@@ -17,3 +17,8 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js')}}"></script>
+
+    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+    <!-- Chartisan -->
+    <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+    <!-- Your application script -->

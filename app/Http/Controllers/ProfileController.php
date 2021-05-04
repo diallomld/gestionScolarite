@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = Profile::all();
-        return view("profile.index",compact("profiles"));
+        return view("profiles.index",compact("profiles"));
     }
 
     /**
@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view("profile.create");
+        return view("profiles.create");
     }
 
     /**
@@ -38,19 +38,19 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nomprofile' => ['required', 'min:3'],
-            
+            'nom' => ['required', 'min:3'],
+
         ]);
 
 
         $profile = new Profile();
 
-        $profile->nomprofile = $validated['nomprofile'];
-        
+        $profile->nom = $validated['nom'];
+
 
         $profile->save();
 
-        return redirect()->route('profile.index')->with('success',' Bravo ! La profile a ete crée avec success');
+        return redirect()->route('profile.index')->with('success',' Bravo ! Le profile a ete crée avec success');
     }
 
     /**
@@ -72,8 +72,8 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        return view('profile.edit',compact('profile'));
-        
+        return view('profiles.edit',compact('profile'));
+
     }
 
     /**
@@ -86,10 +86,10 @@ class ProfileController extends Controller
     public function update(Request $request, Profile $profile)
     {
         $validated = $request->validate([
-            'nomprofile'=> ['required']
+            'nom'=> ['required']
         ]);
 
-        $profile->nomprofile = $validated['nomprofile'];
+        $profile->nom = $validated['nom'];
         $profile->update();
         return redirect()->route('profile.index')->with('success',' le profile a ete modifier avec succes');
     }

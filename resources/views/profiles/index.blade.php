@@ -4,7 +4,7 @@
     <div class="row col-lg-12">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Liste des Evaluation</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Liste des profiles</h6>
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -23,44 +23,37 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('evaluation.create') }}" class="btn btn-success">Ajouter</a>
+                    <a href="{{ route('profile.create') }}" class="btn btn-success">Ajouter profile</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Ec</th>
-                                <th>Nom Classe</th>
-                                <th>Semestre</th>
-                                <th>Date Evaluation </th>
-                                <th>Type Evaluation</th>
+                                <th>nom</th>
+                                <th>Date de creation</th>
+                                <th>Date de mise à jour</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>id</th>
-                                <th>Ec</th>
-                                <th>Nom Class</th>
-                                <th>Semestre</th>
-                                <th>Date Evaluation </th>
-                                <th>Type Evaluation</th>
+                                <th>nom</th>
+                                <th>Date de creation</th>
+                                <th>Date de mise à jour</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($evaluations as $evaluation)
+                            @foreach ($profiles as $profile)
 
                             <tr>
-                                <th> {{ $evaluation->idevaluation }} </th>
-                                <th>{{ $evaluation->ec->nomec }}</th>
-                                <th>{{ $evaluation->classe->nomclasse }}</th>
-                                <th>{{ $evaluation->semestre->libellesemestre }}</th>
-                                <th>{{ $evaluation->dateevaluation }}</th>
-                                <th>{{ $evaluation->typeevaluation }}</th>
-                                <th class="btn btn-primary"><a class="btn-primary" href="{{ route('evaluation.edit', $evaluation->idevaluation ) }}">Modifier</a></th>
+                                <td> {{ $profile->id }} </td>
+                                <td>{{ $profile->nom }}</td>
+                                <td>{{ $profile->created_at }}</td>
+                                <td>{{ $profile->updated_at }}</td>
+                                <td class="btn btn-primary"><a class="btn-primary" href="{{ route('profile.edit', $profile->id ) }}">Modifier</a></td>
 
-                                <form action="{{ route('evaluation.destroy', $evaluation->idevaluation ) }}" method="post">
+                                <form action="{{ route('profile.destroy', $profile->id ) }}" method="post">
                                     @method('DELETE')
                                     @csrf
                                     <th class="btn btn-danger"> <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>
@@ -71,7 +64,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="card" style="margin-left: 40%">{{ $evaluations->links() }}</div>
                 </div>
             </div>
         </div>

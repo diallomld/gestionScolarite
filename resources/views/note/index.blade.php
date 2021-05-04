@@ -54,7 +54,6 @@
                                 <th> {{ $note->idnote }} </th>
                                 <th>{{ $note->evaluation->ec->nomec}}</th>
                                 <th>{{ $note->note }}</th>
-                                <th>{{ $note->evaluation->typeevaluation }}</th>
                                 <th>{{$note->evaluation->semestre->libellesemestre }}</th>
                                 <th>{{ $note->etudiant->nom }}</th>
                                 <th class="btn btn-primary"><a class="btn-primary" href="{{ route('note.edit', $note->idnote ) }}">Modifier</a></th>
@@ -70,6 +69,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="card" style="margin-left: 40%">{{ $notes->links() }}</div>
                 </div>
             </div>
         </div>

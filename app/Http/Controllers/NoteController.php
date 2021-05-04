@@ -7,6 +7,7 @@ use App\Models\Etudiant;
 use App\Models\Evaluation;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -17,7 +18,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::all();
+        //$notes = DB::table('note')->paginate(10);
+        $notes = Note::with('evaluation','etudiant')->paginate(5);
         return view("note.index",compact("notes"));
     }
 

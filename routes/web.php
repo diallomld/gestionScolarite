@@ -14,16 +14,23 @@ use App\Http\Controllers\ModePaiementController;
 use App\Http\Controllers\NationnaliteController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaimentController;
+use App\Http\Controllers\PaymentChart;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\SpecialiteController;
 use App\Http\Controllers\UeController;
+use App\Models\Classe;
 use App\Models\Etudiant;
+use App\Models\Nationnalite;
 use App\Models\Paiement;
 use App\Models\Professeur;
+use App\Models\Salle;
+use App\Models\Specialite;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,14 +72,20 @@ Route::middleware('auth')->group(function(){
     Route::resource('nationnalite', NationnaliteController::class);
     Route::resource('modepaiement', ModePaiementController::class);
 });
-Route::resource('profile', ProfilController::class)->except('show');
+Route::resource('profile', ProfileController::class)->except('show');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $paiements = Paiement::all()->sum('montant');
     $etudiants = Etudiant::all()->count();
     $profs = Professeur::all()->count();
-    return view('home', compact('paiements','etudiants','profs'));
+    $classes = Classe::all()->count();
+    $nationnalites = Nationnalite::all()->count();
+    $specs = Specialite::all()->count();
+    $salles = Salle::all()->count();
+    $users = User::all()->count();
+    return view('home', compact('paiements','etudiants','profs','classes',
+    'nationnalites','specs','salles','users'));
 })->name('dashboard');
 
 
@@ -85,3 +98,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('recu/{id}', [RapportController::class,'recu'])->name('recu');
 Route::get('bulletin/{id}', [RapportController::class,'bulletin'])->name('bulletin');
 Route::get('bulletin2/{id}', [RapportController::class,'bulletin2'])->name('bulletin2');
+
+
+// statistics()
+
+Route::get('chart/payment', [PaymentChart::class,'index'])->name('chart_payment');

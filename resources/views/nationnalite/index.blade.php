@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <a href="{{ route('nationnalite.create') }}" class="btn btn-success">Ajouter</a>
-                    <a href="{{ route('recu') }}" class="btn btn-success">Inmprimer</a>
+                    <!--<a href="" class="btn btn-success">Inmprimer</a>-->
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>

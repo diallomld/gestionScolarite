@@ -32,9 +32,9 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Julliet", "Août", "Septembre", "Octombre", "Novembre", "Decembre"],
     datasets: [{
-      label: "Earnings",
+      label: "Chiffre d'affaires",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -69,16 +69,16 @@ var myLineChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 11
         }
       }],
       yAxes: [{
         ticks: {
-          maxTicksLimit: 5,
+          maxTicksLimit: 10,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'CFA ' + number_format(value);
           }
         },
         gridLines: {
@@ -110,7 +110,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': CFA ' + number_format(tooltipItem.yLabel);
         }
       }
     }
