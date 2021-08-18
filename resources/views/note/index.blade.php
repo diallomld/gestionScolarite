@@ -30,8 +30,8 @@
                                 <th>id</th>
                                 <th>Ec</th>
                                 <th>Note</th>
-                                <th>Evaluation</th>
                                 <th>Semestre</th>
+                                <th>Evaluation</th>
                                 <th>Etudiant</th>
                                 <th>Action</th>
                             </tr>
@@ -41,8 +41,8 @@
                                 <th>id</th>
                                 <th>Ec</th>
                                 <th>Note</th>
-                                <th>Evaluation</th>
                                 <th>Semestre</th>
+                                <th>Evaluation</th>
                                 <th>Etudiant</th>
                                 <th>Action</th>
                             </tr>
@@ -55,6 +55,7 @@
                                 <th>{{ $note->evaluation->ec->nomec}}</th>
                                 <th>{{ $note->note }}</th>
                                 <th>{{$note->evaluation->semestre->libellesemestre }}</th>
+                                <th>{{$note->evaluation->typeevaluation }}</th>
                                 <th>{{ $note->etudiant->nom }}</th>
                                 <th class="btn btn-primary"><a class="btn-primary" href="{{ route('note.edit', $note->idnote ) }}">Modifier</a></th>
 

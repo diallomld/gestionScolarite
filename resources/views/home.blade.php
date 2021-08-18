@@ -232,12 +232,12 @@
     </div>
 
     <!-- Content Row -->
+    <!-- Content Row
+
     <div class="row">
 
-        <!-- Content Column -->
         <div class="col-lg-6 mb-4">
 
-            <!-- Project Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
@@ -276,7 +276,6 @@
                 </div>
             </div>
 
-            <!-- Color System -->
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <div class="card bg-primary text-white shadow">
@@ -348,7 +347,6 @@
 
         <div class="col-lg-6 mb-4">
 
-            <!-- Illustrations -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
@@ -367,7 +365,6 @@
                 </div>
             </div>
 
-            <!-- Approach -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
@@ -383,6 +380,7 @@
 
         </div>
     </div>
+    -->
 
 </div>
 @endsection

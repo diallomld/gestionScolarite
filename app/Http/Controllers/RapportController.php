@@ -23,7 +23,7 @@ class RapportController extends Controller
         new ModelNotFoundException('Erreur');
         //dd($paiement);
 
-        $logo = base_path()."\logo.jpg";
+        $logo = base_path()."\logo.png";
         $pdf = PDF::loadView('rapport.recu', compact('paiement','logo'));
 
         return $pdf->stream();
@@ -31,7 +31,7 @@ class RapportController extends Controller
 
     public function bulletin(int $id){
 
-        $logo = base_path()."\logo.jpg";
+        $logo = base_path()."\logo.png";
         //dd($logo);
         $etudiant = Etudiant::findOrFail($id);
 
@@ -41,7 +41,7 @@ class RapportController extends Controller
     }
     public function bulletin2(int $id){
 
-        $logo = base_path()."\logo.jpg";
+        $logo = base_path()."\logo.png";
         //dd($logo);
         $etudiant = Etudiant::findOrFail($id);
         $semestres = Semestre::all();

@@ -47,7 +47,7 @@
     <table style="width: 100%; border: solid; margin-top: 0px;">
         <tr>
             <td>
-                <img src="{{ $logo }}" alt="logo"/>
+                <img width="210" src="{{ $logo }}" alt="logo"/>
             </td>
             <td style="padding-left: 230px; float: right; text-align: center; width: 100%">
                 <table border="1px">

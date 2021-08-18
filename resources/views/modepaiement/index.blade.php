@@ -44,7 +44,7 @@
 
                             <tr>
                                 <th> {{ $modepaiement->idmodepaiement }} </th>
-                                <th>{{ $modepaiement->liellemodepaiement }}</th>
+                                <th>{{ $modepaiement->libellemodepaiement }}</th>
                                 <th class="btn btn-primary"><a class="btn-primary" href="{{ route('modepaiement.edit', $modepaiement->idmodepaiement ) }}">Modifier</a></th>
 
                                 <form action="{{ route('modepaiement.destroy', $modepaiement->idmodepaiement ) }}" method="post">
