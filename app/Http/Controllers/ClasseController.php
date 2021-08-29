@@ -42,6 +42,7 @@ class ClasseController extends Controller
             'idfiliere' => ['required', 'exists:"\App\Models\Specialite",idfiliere'],
             'nomclasse' => ['required', 'min:2', 'unique:classe'],
             'fraisscolarite' => ['required', 'numeric'],
+            'fraisinscription' => ['required', 'numeric'],
         ]);
 
         $classe = new Classe();
@@ -49,6 +50,7 @@ class ClasseController extends Controller
         $classe->idfiliere = $validated['idfiliere'];
         $classe->nomclasse = $validated['nomclasse'];
         $classe->fraisscolarite = $validated['fraisscolarite'];
+        $classe->fraisinscription = $validated['fraisinscription'];
         $classe->save();
 
         return redirect()->route('classe.index')->with('success','Classe ajouter avec succees');
@@ -91,10 +93,12 @@ class ClasseController extends Controller
             'idfiliere' => ['required', 'exists:"\App\Models\Specialite",idfiliere'],
             'nomclasse' => ['required', 'min:2'],
             'fraisscolarite' => ['required', 'numeric'],
+            'fraisinscription' => ['required', 'numeric'],
         ]);
         $classe->idfiliere = $validated['idfiliere'];
         $classe->nomclasse = $validated['nomclasse'];
         $classe->fraisscolarite = $validated['fraisscolarite'];
+        $classe->fraisinscription = $validated['fraisinscription'];
         $classe->save();
 
         return redirect()->route('classe.index')->with('success','La classe modifiée avec succees');

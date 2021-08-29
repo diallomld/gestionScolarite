@@ -31,6 +31,7 @@
                                 <th>Filiere</th>
                                 <th>Nom classe</th>
                                 <th>Frais De scolarité</th>
+                                <th>Frais D'inscription</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -40,6 +41,7 @@
                                 <th>Filiere</th>
                                 <th>Nom classe</th>
                                 <th>Frais De scolarité</th>
+                                <th>Frais D'inscription</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -51,6 +53,7 @@
                                 <td> {{ $classe->filiere->nomfiliere }} </td>
                                 <td>{{ $classe->nomclasse }}</td>
                                 <td>{{ $classe->fraisscolarite ? $classe->fraisscolarite:0 }} <b>FCFA</b></td>
+                                <td>{{ $classe->fraisinscription ? $classe->fraisinscription:0 }} <b>FCFA</b></td>
                                 <td class="btn btn-primary"><a class="btn-primary" href="{{ route('classe.edit', $classe->numero ) }}">Modifier</a></td>
 
                                 <form action="{{ route('classe.destroy', $classe->numero ) }}" method="post">
