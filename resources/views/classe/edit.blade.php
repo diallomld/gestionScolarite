@@ -39,6 +39,13 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
+                <div class="form-group">
+                  <label for="fraisscolarite">Frais de Scolarite</label>
+                  <input name="fraisscolarite" value="{{ $classe->fraisscolarite }}" type="text" class="form-control @error('fraisscolarite') is-invalid @enderror" id="fraisscolarite" placeholder="entrer le nom de l'classe..."/>
+                    @error('fraisscolarite')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
                 <button type="submit" class="btn btn-primary">Modifier la classe</button>
             </form>
           </div>

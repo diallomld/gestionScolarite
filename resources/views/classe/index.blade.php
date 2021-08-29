@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="row col-lg-12">
+    <div class="row col-lg-12" style="justify-content: center">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Liste des Classe/Groupe</h6>
@@ -25,19 +25,21 @@
                     </div>
                     <a href="{{ route('classe.create') }}" class="btn btn-success">Ajouter</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
                                 <th>Numero</th>
                                 <th>Filiere</th>
                                 <th>Nom classe</th>
+                                <th>Frais De scolarité</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <tfoot class="thead-light">
                             <tr>
                                 <th>Numero</th>
                                 <th>Filiere</th>
                                 <th>Nom classe</th>
+                                <th>Frais De scolarité</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -48,6 +50,7 @@
                                 <td> {{ $classe->numero }} </td>
                                 <td> {{ $classe->filiere->nomfiliere }} </td>
                                 <td>{{ $classe->nomclasse }}</td>
+                                <td>{{ $classe->fraisscolarite ? $classe->fraisscolarite:0 }} <b>FCFA</b></td>
                                 <td class="btn btn-primary"><a class="btn-primary" href="{{ route('classe.edit', $classe->numero ) }}">Modifier</a></td>
 
                                 <form action="{{ route('classe.destroy', $classe->numero ) }}" method="post">

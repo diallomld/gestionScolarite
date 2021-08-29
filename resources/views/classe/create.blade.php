@@ -35,7 +35,14 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Ajouter une classe</button>
+                <div class="form-group">
+                  <label for="fraisscolarite">Frais de Scolarité</label>
+                  <input name="fraisscolarite" type="text" class="form-control @error('fraisscolarite') is-invalid @enderror" id="fraisscolarite" placeholder="entrer les frais..."/>
+                    @error('fraisscolarite')
+                        <div class="alert alert-danger"> {{$message}} </div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Ajouter une classe</button>
             </form>
           </div>
         </div>

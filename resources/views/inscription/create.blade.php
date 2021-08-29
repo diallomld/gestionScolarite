@@ -3,7 +3,7 @@
 @section('content')
     <div class="align-content-md-center">
 
-        <div class="card text-left">
+        <div class="card text-left" >
             <div class="card-header">Formulaire d'une inscription</div>
           <div class="card-body">
             <form method="POST" action="{{ route('inscription.store')}}">
@@ -21,7 +21,7 @@
                     <label for="matricule">Select. Matricule etudiant</label>
                     <select name="matricule" class="form-control @error('matricule') is-invalid @enderror" id="matricule">
                       @foreach ($etudiants as $etudiant)
-                          <option value="{{ $etudiant->matricule }}">{{ $etudiant->nom }}</option>
+                          <option value="{{ $etudiant->matricule }}">{{ $etudiant->genre=='masculin'? 'M'.' '.$etudiant->prenom.' '.$etudiant->nom.', ne(é) le '. \Carbon\Carbon::parse($etudiant->datenaissance)->format('d/m/Y').' à '. $etudiant->lieu:'Mme'.' '.$etudiant->prenom.' '.$etudiant->nom.', ne(é) le '. \Carbon\Carbon::parse($etudiant->datenaissance)->format('d/m/Y').' à '. $etudiant->lieu  }}</option>
                       @endforeach
                     </select>
                     @error('matricule')
@@ -32,7 +32,7 @@
                     <label for="numero">Select. Classe</label>
                     <select name="numero" value="{{ old('numeo') }}" class="form-control @error('numero') is-invalid @enderror" id="numero">
                       @foreach ($classes as $classe)
-                          <option value="{{ $classe->numero }}">{{ $classe->nomclasse }}</option>
+                          <option value="{{ $classe->numero }}">{{ $classe->nomclasse}}</option>
                       @endforeach
                     </select>
                     @error('numero')
@@ -50,14 +50,7 @@
                         <div class="alert alert-danger"> {{$message}} </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                  <label for="dateinscription">Date d'inscription</label>
-                  <input name="dateinscription" type="date" class="form-control @error('dateinscription') is-invalid @enderror" id="dateinscription"/>
-                    @error('dateinscription')
-                        <div class="alert alert-danger"> {{$message}} </div>
-                    @enderror
-                </div>
-                <button type="submit" class="btn btn-primary">Ajouter une inscription</button>
+                <button type="submit" class="btn btn-primary btn-block">Ajouter une inscription</button>
             </form>
           </div>
         </div>

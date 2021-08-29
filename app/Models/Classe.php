@@ -16,7 +16,8 @@ class Classe extends Model
 
     protected $fillable = [
         'idfiliere',
-        'nomclasse'
+        'nomclasse',
+        'fraisscolarite'
     ];
 
     public function filiere(){

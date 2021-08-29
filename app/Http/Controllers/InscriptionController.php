@@ -46,14 +46,13 @@ class InscriptionController extends Controller
             'matricule' => ['required', 'exists:"\App\Models\Etudiant",matricule'],
             'numero' => ['required', 'exists:"\App\Models\Classe",numero'],
             'idannescolaire' => ['required', 'exists:"\App\Models\Anneescolaire",idannescolaire'],
-            'dateinscription' => ['required', 'date']
         ]);
 
         $inscription = new Inscription();
         $inscription->matricule = $request->matricule;
         $inscription->numero = $request->numero;
         $inscription->idannescolaire = $request->idannescolaire;
-        $inscription->dateinscription = $request->dateinscription;
+        $inscription->dateinscription = date('Y-m-d H:i:s');
 
         $inscription->save();
 
@@ -103,8 +102,7 @@ class InscriptionController extends Controller
         ]);
         $inscription->matricule = $request->matricule;
         $inscription->idannescolaire = $request->idannescolaire;
-        $inscription->dateinscription = $request->dateinscription;
-
+        $inscription->dateinscription = date('Y-m-d H:i:s');
         $inscription->save();
 
         return redirect()->route('inscription.index')->with('success','Inscription modifié avec succees');

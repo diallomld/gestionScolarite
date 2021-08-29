@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Etudiant;
 use App\Models\Nationnalite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EtudiantController extends Controller
 {
@@ -15,7 +16,7 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        $etudiants = Etudiant::all();
+        $etudiants = Etudiant::with('nationnalite')->paginate(5);
         return view('etudiant.index', compact('etudiants'));
     }
 
@@ -49,7 +50,6 @@ class EtudiantController extends Controller
             'datenaissance' => ['required','date'],
             'lieu' => ['required'],
             'genre' => ['required'],
-            'disponibilite' => ['required'],
         ]);
 
         $etudiant = new Etudiant();
@@ -63,7 +63,26 @@ class EtudiantController extends Controller
         $etudiant->datenaissance = $validated['datenaissance'];
         $etudiant->lieu = $validated['lieu'];
         $etudiant->genre = $validated['genre'];
-        $etudiant->disponibilite = $validated['disponibilite'];
+        $etudiant->disponibilite = $request['disponibilite'];
+        $etudiant->matrimonial = $request['matrimonial'];
+        $etudiant->teldomicile = $request['teldomicile'];
+        $etudiant->siteweb = $request['siteweb'];
+        $etudiant->reseausocial = $request['reseausocial'];
+        $etudiant->email = $request['email'];
+        $etudiant->societe = $request['societe'];
+        $etudiant->profession = $request['profession'];
+        $etudiant->fonction = $request['fonction'];
+        $etudiant->adressesociete = $request['adressesociete'];
+        $etudiant->telbureau = $request['telbureau'];
+        $etudiant->dernieretablissement = $request['dernieretablissement'];
+        $etudiant->niveauetude = $request['niveauetude'];
+        $etudiant->diplome_titre = $request['diplometitre'];
+        $etudiant->annee_frequantation = $request['anneefrequentation'];
+        $etudiant->maladie = $request['maladie'];
+        $etudiant->heuredebut = $request['heuredebut'];
+        $etudiant->heurefin = $request['heurefin'];
+        $etudiant->fraispresinscription = $request['fraispresinscription'];
+        $etudiant->observations = $request['observations'];
 
         $etudiant->save();
 
@@ -127,6 +146,25 @@ class EtudiantController extends Controller
         $etudiant->lieu = $validated['lieu'];
         $etudiant->genre = $validated['genre'];
         $etudiant->disponibilite = $validated['disponibilite'];
+        $etudiant->matrimonial = $request['matrimonial'];
+        $etudiant->teldomicile = $request['teldomicile'];
+        $etudiant->siteweb = $request['siteweb'];
+        $etudiant->reseausocial = $request['reseausocial'];
+        $etudiant->email = $request['email'];
+        $etudiant->societe = $request['societe'];
+        $etudiant->profession = $request['profession'];
+        $etudiant->fonction = $request['fonction'];
+        $etudiant->adressesociete = $request['adressesociete'];
+        $etudiant->telbureau = $request['telbureau'];
+        $etudiant->dernieretablissement = $request['dernieretablissement'];
+        $etudiant->niveauetude = $request['niveauetude'];
+        $etudiant->diplome_titre = $request['diplometitre'];
+        $etudiant->annee_frequantation = $request['anneefrequentation'];
+        $etudiant->maladie = $request['maladie'];
+        $etudiant->heuredebut = $request['heuredebut'];
+        $etudiant->heurefin = $request['heurefin'];
+        $etudiant->fraispresinscription = $request['fraispresinscription'];
+        $etudiant->observations = $request['observations'];
 
         $etudiant->update();
 

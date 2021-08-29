@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="row col-lg-12">
+    <div class="row col-lg-12" style="justify-content: center">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Liste des Inscriptions</h6>
@@ -25,7 +25,7 @@
                     </div>
                     <a href="{{ route('inscription.create') }}" class="btn btn-success">Ajouter</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
                                 <th>Numero</th>
                                 <th>Matricule etudiant</th>
@@ -35,7 +35,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <tfoot class="thead-light">
                             <tr>
                                 <th>Numero</th>
                                 <th>Matricule etudiant</th>

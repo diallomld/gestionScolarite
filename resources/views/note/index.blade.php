@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="row col-lg-12">
+    <div class="row col-lg-12" style="justify-content: center">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Liste des notes</h6>
@@ -24,8 +24,8 @@
                         </div>
                     </div>
                     <a href="{{ route('note.create') }}" class="btn btn-success">Ajouter</a>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
+                    <table class="table table-bordered" id="dataTable" width="100%"  cellspacing="0">
+                        <thead class="thead-light">
                             <tr>
                                 <th>id</th>
                                 <th>Ec</th>
@@ -33,10 +33,11 @@
                                 <th>Semestre</th>
                                 <th>Evaluation</th>
                                 <th>Etudiant</th>
-                                <th>Action</th>
+                                <th >Modifier</th>
+                                <th>Suprimer</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <tfoot class="thead-light">
                             <tr>
                                 <th>id</th>
                                 <th>Ec</th>
@@ -44,7 +45,8 @@
                                 <th>Semestre</th>
                                 <th>Evaluation</th>
                                 <th>Etudiant</th>
-                                <th>Action</th>
+                                <th>Modifier</th>
+                                <th>Suprimer</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -62,7 +64,7 @@
                                 <form action="{{ route('note.destroy', $note->idnote ) }}" method="post">
                                     @method('DELETE')
                                     @csrf
-                                    <th class="btn btn-danger"> <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>
+                                    <th> <button class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>
 
                                 </form>
                             </tr>
@@ -70,7 +72,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="card" style="margin-left: 40%">{{ $notes->links() }}</div>
+                    <div style="margin-left: 40%">{{ $notes->links() }}</div>
                 </div>
             </div>
         </div>
