@@ -6,6 +6,7 @@ use App\Models\Anneescolaire;
 use App\Models\Classe;
 use App\Models\Etudiant;
 use App\Models\Inscription;
+use App\Models\Partenaire;
 use Illuminate\Http\Request;
 
 class InscriptionController extends Controller
@@ -18,7 +19,8 @@ class InscriptionController extends Controller
     public function index()
     {
         $inscriptions = Inscription::all();
-        return view('inscription.index', compact('inscriptions'));
+        $partenaires = Partenaire::all();
+        return view('inscription.index', compact('inscriptions','partenaires'));
     }
 
     /**
@@ -31,7 +33,8 @@ class InscriptionController extends Controller
         $etudiants = Etudiant::all();
         $classes = Classe::all();
         $annees = Anneescolaire::all();
-        return view('inscription.create',compact('annees', 'classes','etudiants'));
+        $partenaires = Partenaire::all();
+        return view('inscription.create',compact('annees', 'classes','etudiants','partenaires'));
     }
 
     /**
@@ -46,12 +49,27 @@ class InscriptionController extends Controller
             'matricule' => ['required', 'exists:"\App\Models\Etudiant",matricule'],
             'numero' => ['required', 'exists:"\App\Models\Classe",numero'],
             'idannescolaire' => ['required', 'exists:"\App\Models\Anneescolaire",idannescolaire'],
+            'fraisscolarite' => ['required','numeric'],
+            'fraisinscription' => ['required','numeric']
         ]);
-
         $inscription = new Inscription();
         $inscription->matricule = $request->matricule;
-        $inscription->numero = $request->numero;
         $inscription->idannescolaire = $request->idannescolaire;
+        $inscription->fraisscolarite = $request->fraisscolarite;
+        $inscription->fraisinscription = $request->fraisinscription;
+        $inscription->fraisinscription = $request->fraisinscription;
+        $inscription->fraisexamen = $request->fraisexamen;
+        $inscription->fraisuniforme = $request->fraisuniforme;
+        $inscription->fraissoutenance = $request->fraissoutenance;
+        $inscription->fraisdossier = $request->fraisdossier;
+        $inscription->fraisassurance = $request->fraisassurance;
+        $inscription->fraisamical = $request->fraisamical;
+        $inscription->fraisbibliotheque = $request->fraisbibliotheque;
+        $inscription->fraisstage = $request->fraisstage;
+        $inscription->fraiscantine = $request->fraiscantine;
+        $inscription->bourse = $request->bourse;
+        $inscription->note = $request->note;
+        $inscription->partenaire_id = $request->partenaire;
         $inscription->dateinscription = date('Y-m-d H:i:s');
 
         $inscription->save();
@@ -67,7 +85,9 @@ class InscriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $inscription = Inscription::findOrFail($id);
+
+        return json_encode($inscription);
     }
 
     /**
@@ -81,7 +101,8 @@ class InscriptionController extends Controller
         //$etudiants = Etudiant::all();
         $classes = Classe::all();
         $annees = Anneescolaire::all();
-        return view('inscription.edit',compact('inscription','annees', 'classes'));
+        $partenaires = Partenaire::all();
+        return view('inscription.edit',compact('inscription','annees', 'classes','partenaires'));
     }
 
     /**
@@ -98,10 +119,26 @@ class InscriptionController extends Controller
             'matricule' => ['required', 'exists:"\App\Models\Etudiant",matricule'],
             'numero' => ['required', 'exists:"\App\Models\Classe",numero'],
             'idannescolaire' => ['required', 'exists:"\App\Models\Anneescolaire",idannescolaire'],
-            'dateinscription' => ['required', 'date']
+            'fraisscolarite' => ['required','numeric'],
+            'fraisinscription' => ['required','numeric']
         ]);
         $inscription->matricule = $request->matricule;
         $inscription->idannescolaire = $request->idannescolaire;
+        $inscription->fraisscolarite = $request->fraisscolarite;
+        $inscription->fraisinscription = $request->fraisinscription;
+        $inscription->fraisinscription = $request->fraisinscription;
+        $inscription->fraisexamen = $request->fraisexamen;
+        $inscription->fraisuniforme = $request->fraisuniforme;
+        $inscription->fraissoutenance = $request->fraissoutenance;
+        $inscription->fraisdossier = $request->fraisdossier;
+        $inscription->fraisassurance = $request->fraisassurance;
+        $inscription->fraisamical = $request->fraisamical;
+        $inscription->fraisbibliotheque = $request->fraisbibliotheque;
+        $inscription->fraisstage = $request->fraisstage;
+        $inscription->fraiscantine = $request->fraiscantine;
+        $inscription->bourse = $request->bourse;
+        $inscription->note = $request->note;
+        $inscription->partenaire_id = $request->partenaire;
         $inscription->dateinscription = date('Y-m-d H:i:s');
         $inscription->save();
 

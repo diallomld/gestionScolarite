@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="row col-lg-12" style="justify-content: center">
+    <div class="row col-lg-10" style="justify-content: center; margin-left: 10%">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Liste des Etudiants</h6>
@@ -153,7 +153,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div style="margin-left: 40%">{{ $etudiants->links() }}</div>
+                    <div style="margin-left: 40%;">{{ $etudiants->links() }}</div>
                 </div>
             </div>
         </div>

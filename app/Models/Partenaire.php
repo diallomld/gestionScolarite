@@ -9,7 +9,9 @@ class Partenaire extends Model
 {
     use HasFactory;
 
+    protected $fillable =["nom"];
+
     public function inscriptions(){
-        return $this->hasMany(Inscription::class,'numinscription');
+        return $this->hasMany(Inscription::class,'partenaire_id');
     }
 }

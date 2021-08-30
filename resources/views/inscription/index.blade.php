@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="row col-lg-12" style="justify-content: center">
+    <div class="row col-lg-10" style="justify-content: center; margin-left: 10%">
         <div class="card align-content-lg-center shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Liste des Inscriptions</h6>
@@ -30,9 +30,24 @@
                                 <th>Numero</th>
                                 <th>Matricule etudiant</th>
                                 <th>Annee Scolaire</th>
-                                <th>Classe</th>
+                                <th>classe</th>
                                 <th>Date d'inscription</th>
-                                <th>Action</th>
+                                <th>Frais de scolarite</th>
+                                <th>Frais d'inscription</th>
+                                <th>Frais d'examen</th>
+                                <th>Frais uniforme</th>
+                                <th>Frais de soutenance</th>
+                                <th>Frais dossier</th>
+                                <th>Frais assurance</th>
+                                <th>Frais amical</th>
+                                <th>Frais bibliotheque</th>
+                                <th>Frais stage</th>
+                                <th>Frais cantine</th>
+                                <th>Bourse</th>
+                                <th>Note</th>
+                                <th>Partenaire</th>
+                                <th>Modifier</th>
+                                <th>Suprimer</th>
                             </tr>
                         </thead>
                         <tfoot class="thead-light">
@@ -42,26 +57,58 @@
                                 <th>Annee Scolaire</th>
                                 <th>classe</th>
                                 <th>Date d'inscription</th>
-                                <th>Action</th>
+                                <th>Frais de scolarite</th>
+                                <th>Frais d'inscription</th>
+                                <th>Frais d'examen</th>
+                                <th>Frais uniforme</th>
+                                <th>Frais de soutenance</th>
+                                <th>Frais dossier</th>
+                                <th>Frais assurance</th>
+                                <th>Frais amical</th>
+                                <th>Frais bibliotheque</th>
+                                <th>Frais stage</th>
+                                <th>Frais cantine</th>
+                                <th>Bourse</th>
+                                <th>Note</th>
+                                <th>Partenaire</th>
+                                <th>Modifier</th>
+                                <th>Suprimer</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach($inscriptions as $inscription)
 
                             <tr>
-                                <td> {{ $inscription->numinscription }} </td>
-                                <td> {{ $inscription->etudiant->nom }} </td>
-                                <td> {{ $inscription->annee->anneescolaire }} </td>
-                                <td> {{ $inscription->classe->nomclasse }} </td>
+                                <td>{{ $inscription->numinscription }} </td>
+                                <td>{{ $inscription->etudiant->nom }} </td>
+                                <td>{{ $inscription->annee->anneescolaire }} </td>
+                                <td>{{ $inscription->classe->nomclasse }} </td>
                                 <td>{{ $inscription->dateinscription }}</td>
-                                <td class="btn btn-primary"><a class="btn-primary" href="{{ route('inscription.edit', $inscription->numinscription ) }}">Modifier</a></td>
+                                <td>{{ $inscription->fraisscolarite }}</td>
+                                <td>{{ $inscription->fraisinscription }}</td>
+                                <td>{{ $inscription->fraisexamen }}</td>
+                                <td>{{ $inscription->fraisuniforme }}</td>
+                                <td>{{ $inscription->fraissoutenance }}</td>
+                                <td>{{ $inscription->fraisdossier }}</td>
+                                <td>{{ $inscription->fraisassurance }}</td>
+                                <td>{{ $inscription->fraisamical }}</td>
+                                <td>{{ $inscription->fraisbibliotheque }}</td>
+                                <td>{{ $inscription->fraisstage }}</td>
+                                <td>{{ $inscription->fraiscantine }}</td>
+                                <td>{{ $inscription->bourse ? $inscription->bourse:"non défini"}}</td>
+                                <td>{{ $inscription->note ? $inscription->note:"non défini" }}</td>
+                                <td>{{ !empty($inscription->partenaire->nom) ? $inscription->partenaire->nom:"non defini" }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ route('inscription.edit', $inscription->numinscription ) }}">Modifier</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('inscription.destroy', $inscription->numinscription ) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button>
 
-                                <form action="{{ route('inscription.destroy', $inscription->numinscription ) }}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <th class="btn btn-danger"> <button onclick="return confirm('Voulez-vous vraiment supprimer')" type="submit" class="btn-danger">Supprimer</button></th>
-
-                                </form>
+                                    </form>
+                                </td>
                             </tr>
 
                             @endforeach

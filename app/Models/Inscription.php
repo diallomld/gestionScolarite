@@ -26,7 +26,7 @@ class Inscription extends Model
         return $this->belongsTo(Classe::class,'numero');
     }
     public function partenaire(){
-        return $this->belongsTo(Partenaire::class);
+        return $this->belongsTo(Partenaire::class,'partenaire_id');
     }
     public function etudiant(){
         return $this->belongsTo(Etudiant::class,'matricule');

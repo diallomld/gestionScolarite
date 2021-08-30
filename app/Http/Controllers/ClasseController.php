@@ -65,7 +65,9 @@ class ClasseController extends Controller
      */
     public function show($id)
     {
-        //
+        $classe = Classe::findOrFail($id);
+
+        return json_encode($classe);
     }
 
     /**

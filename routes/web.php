@@ -14,6 +14,7 @@ use App\Http\Controllers\ModePaiementController;
 use App\Http\Controllers\NationnaliteController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaimentController;
+use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\PaymentChart;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\ProfilController;
@@ -71,6 +72,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('note', NoteController::class);
     Route::resource('nationnalite', NationnaliteController::class);
     Route::resource('modepaiement', ModePaiementController::class);
+    Route::resource('partenaire', PartenaireController::class);
 });
 Route::resource('profile', ProfileController::class)->except('show');
 
